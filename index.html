@@ -7,13 +7,11 @@
   <title>NextGen Academy — Бесплатный 3-дневный интенсив</title>
   <meta name="description" content="Эксклюзивный 3-дневный бесплатный интенсив по выходу на удалёнку с нуля: профессия онлайн-ассистент, старт без опыта, сертификат, бонус за регистрацию." />
 
-  <!-- OpenGraph -->
   <meta property="og:title" content="NextGen Academy — Бесплатный 3-дневный интенсив" />
   <meta property="og:description" content="Как с нуля войти в профессию онлайн-ассистент и начать зарабатывать онлайн. Регистрация и бонус." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ru_RU" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
@@ -37,13 +35,15 @@
       --radius2: 18px;
       --pad: clamp(18px, 3.6vw, 44px);
       --max: 1180px;
-
-      /* Assets */
       --hero-bg-image: url("images/hero-bg.jpg");
     }
 
     *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
+    html{
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
     body{
       margin:0;
       font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -54,9 +54,9 @@
         radial-gradient(800px 500px at 40% 120%, rgba(255,122,24,.16), transparent 55%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x: hidden;
+      width: 100%;
     }
 
-    /* Subtle grid + noise */
     .bg-grid{
       position: fixed; inset:0; pointer-events:none; z-index:-3;
       background:
@@ -67,17 +67,24 @@
       opacity:.28;
     }
     .bg-noise{
-      position: fixed; inset:-20%; pointer-events:none; z-index:-2;
+      position: fixed; inset:0; pointer-events:none; z-index:-2;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
       opacity:.07;
-      transform: rotate(-6deg);
+      transform: scale(1.25) rotate(-6deg);
+      transform-origin: 50% 50%;
       mix-blend-mode: overlay;
     }
 
     a{ color: inherit; text-decoration: none; }
     .container{ width: min(var(--max), calc(100% - 2*var(--pad))); margin: 0 auto; }
 
-    /* Header */
+    .logo{
+      height: 34px;
+      width: auto;
+      display:block;
+      border-radius: 10px;
+    }
+
     .header{
       position: sticky; top:0; z-index: 40;
       backdrop-filter: blur(18px);
@@ -88,39 +95,12 @@
       display:flex; align-items:center; justify-content:space-between;
       padding: 14px 0;
       gap: 14px;
+      min-width: 0;
     }
     .brand{
-      display:flex; align-items:center; gap: 12px; min-width: 220px;
-    }
-    .brand-mark{
-      width: 38px; height: 38px; border-radius: 12px;
-      background:
-        radial-gradient(18px 18px at 30% 25%, rgba(255,255,255,.22), transparent 60%),
-        linear-gradient(135deg, rgba(255,122,24,1), rgba(255,155,47,1));
-      box-shadow: 0 18px 40px rgba(255,122,24,.18);
-      position: relative;
-    }
-    .brand-mark:after{
-      content:"";
-      position:absolute; inset: 10px;
-      border-radius: 10px;
-      background: rgba(0,0,0,.30);
-      border: 1px solid rgba(255,255,255,.18);
-      backdrop-filter: blur(10px);
-    }
-    .brand-title{
-      display:flex; flex-direction:column; line-height:1.05;
-    }
-    .brand-title strong{
-      font-family: Unbounded, Manrope, system-ui, sans-serif;
-      letter-spacing: .02em;
-      font-weight: 700;
-      font-size: 14px;
-    }
-    .brand-title span{
-      color: var(--muted2);
-      font-size: 12px;
-      margin-top: 3px;
+      display:flex; align-items:center; gap: 12px;
+      min-width: 0;
+      flex: 0 1 auto;
     }
 
     .nav{
@@ -129,6 +109,7 @@
       font-size: 13px;
       flex: 1;
       justify-content: center;
+      min-width: 0;
     }
     .nav a{
       opacity:.9;
@@ -137,7 +118,10 @@
     .nav a:hover{ opacity: 1; color: rgba(255,255,255,.95); }
 
     .actions{
-      display:flex; align-items:center; gap: 10px; min-width: 220px; justify-content:flex-end;
+      display:flex; align-items:center; gap: 10px;
+      min-width: 0;
+      flex: 0 1 auto;
+      justify-content:flex-end;
     }
 
     .pill{
@@ -166,6 +150,7 @@
       cursor: pointer;
       transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
       user-select: none;
+      white-space: nowrap;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -195,17 +180,16 @@
 
     .btn-ghost{ background: transparent; }
 
-    /* Hero */
     .hero{
       padding: clamp(34px, 6vw, 70px) 0 clamp(30px, 6vw, 64px);
       position: relative;
+      overflow: hidden;
       overflow: clip;
     }
 
-    /* Hero background image (behind heading area) */
     .hero-media{
       position:absolute;
-      inset: -40px -40px -40px -40px;
+      inset: 0;
       z-index: 0;
       pointer-events:none;
     }
@@ -237,6 +221,7 @@
       align-items: stretch;
       position: relative;
       z-index: 1;
+      min-width: 0;
     }
 
     .kicker{
@@ -265,7 +250,6 @@
       letter-spacing: .01em;
       position: relative;
     }
-    /* extra depth behind the heading */
     .hero h1::before{
       content:"";
       position:absolute;
@@ -342,6 +326,7 @@
       backdrop-filter: var(--blur);
       padding: 18px;
       overflow: hidden;
+      min-width: 0;
     }
     .hero-card:before{
       content:"";
@@ -359,14 +344,15 @@
       display:flex; flex-direction:column; gap: 14px;
       height: 100%;
       justify-content: space-between;
+      min-width: 0;
     }
 
-    /* Portrait author photo */
     .author-top{
       display:grid;
       grid-template-columns: 1fr auto;
       gap: 14px;
       align-items: center;
+      min-width: 0;
     }
     .author-photo{
       width: 138px;
@@ -440,7 +426,6 @@
     }
     .note b{ color: rgba(255,255,255,.88); }
 
-    /* Sections */
     section{
       padding: clamp(34px, 6vw, 74px) 0;
       position: relative;
@@ -499,6 +484,7 @@
       overflow: hidden;
       transition: transform .20s ease, border-color .20s ease, background .20s ease;
       min-height: 150px;
+      min-width: 0;
     }
     .card:hover{
       transform: translateY(-2px);
@@ -542,15 +528,16 @@
       line-height: 1.65;
     }
 
-    /* Skills table */
     .skills{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
       gap: 14px;
       align-items: start;
+      min-width: 0;
     }
     .skill-list{
       display:flex; flex-direction:column; gap: 12px;
+      min-width: 0;
     }
     .skill{
       border-radius: var(--radius2);
@@ -562,6 +549,7 @@
       grid-template-columns: 1.2fr 1.2fr .6fr;
       gap: 12px;
       align-items: start;
+      min-width: 0;
     }
     .skill .k{
       font-weight: 800;
@@ -569,12 +557,14 @@
       letter-spacing: .01em;
       color: rgba(255,255,255,.92);
       display:flex; gap: 10px; align-items:flex-start;
+      min-width: 0;
     }
     .skill .k i{ margin-top: 2px; opacity: .95; }
     .skill .v{
       color: var(--muted);
       font-size: 12px;
       line-height: 1.55;
+      min-width: 0;
     }
     .skill .pay{
       display:flex; justify-content:flex-end;
@@ -583,6 +573,7 @@
       font-size: 12px;
       text-align:right;
       white-space: nowrap;
+      min-width: 0;
     }
     .skill .pay span{
       padding: 8px 10px;
@@ -601,6 +592,7 @@
         rgba(255,255,255,.04);
       backdrop-filter: var(--blur);
       box-shadow: var(--shadow);
+      min-width: 0;
     }
     .skills-aside h3{
       margin: 0 0 10px;
@@ -629,12 +621,12 @@
       color: var(--orange2);
     }
 
-    /* Video */
     .video{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       align-items: stretch;
+      min-width: 0;
     }
     .video-frame{
       position: relative;
@@ -648,6 +640,7 @@
       box-shadow: var(--shadow);
       min-height: 320px;
       display:flex;
+      min-width: 0;
     }
     .video-frame .ratio{
       aspect-ratio: 16 / 9;
@@ -658,6 +651,7 @@
       justify-content:center;
       padding: 18px;
       position: relative;
+      min-width: 0;
     }
     .video-frame .ratio:before{
       content:"";
@@ -680,6 +674,7 @@
       cursor: pointer;
       transition: transform .2s ease, border-color .2s ease, background .2s ease;
       user-select:none;
+      max-width: 100%;
     }
     .video-frame .play:hover{
       transform: translateY(-2px);
@@ -693,14 +688,27 @@
       background: linear-gradient(135deg, rgba(255,122,24,1), rgba(255,155,47,1));
       color: #100b06;
       box-shadow: 0 18px 40px rgba(255,122,24,.20);
+      flex: 0 0 auto;
     }
     .play .ptxt{
       display:flex; flex-direction:column; gap: 2px;
+      min-width: 0;
     }
-    .play .ptxt b{ font-size: 13px; color: rgba(255,255,255,.92); }
-    .play .ptxt span{ font-size: 12px; color: var(--muted); }
+    .play .ptxt b{
+      font-size: 13px;
+      color: rgba(255,255,255,.92);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .play .ptxt span{
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-    /* Program tabs */
     .tabs{
       display:flex; gap: 10px; flex-wrap: wrap;
       margin-bottom: 14px;
@@ -728,8 +736,9 @@
       grid-template-columns: 1fr 0.9fr;
       gap: 14px;
       align-items: stretch;
+      min-width: 0;
     }
-    .program-main{ padding: 18px; }
+    .program-main{ padding: 18px; min-width: 0; }
     .program-main h3{
       margin: 0 0 10px;
       font-size: 16px;
@@ -763,18 +772,22 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
+      min-width: 0;
     }
     .stat{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
       padding: 14px;
+      min-width: 0;
     }
     .stat .t{
       display:flex; align-items:center; justify-content:space-between;
       color: rgba(255,255,255,.90);
       font-weight: 900;
       font-size: 12px;
+      gap: 12px;
+      min-width: 0;
     }
     .stat .v{
       margin-top: 8px;
@@ -794,13 +807,13 @@
       line-height: 1.4;
     }
 
-    /* Transform */
     .transform{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
+      min-width: 0;
     }
-    .list{ padding: 18px; }
+    .list{ padding: 18px; min-width: 0; }
     .list h3{
       margin: 0 0 10px;
       font-size: 14px;
@@ -816,11 +829,11 @@
     }
     .list li{ margin: 6px 0; }
 
-    /* FAQ */
     .faq{
       display:grid;
       grid-template-columns: 1fr;
       gap: 10px;
+      min-width: 0;
     }
     details.faq-item{
       border-radius: 18px;
@@ -829,6 +842,7 @@
       backdrop-filter: blur(14px);
       padding: 14px 16px;
       transition: border-color .18s ease, background .18s ease;
+      min-width: 0;
     }
     details.faq-item[open]{
       border-color: rgba(255,122,24,.45);
@@ -844,6 +858,7 @@
       font-weight: 900;
       color: rgba(255,255,255,.92);
       font-size: 13px;
+      min-width: 0;
     }
     .faq-item summary::-webkit-details-marker{ display:none; }
     .faq-item .ans{
@@ -856,17 +871,18 @@
     .chev{
       opacity: .85;
       transition: transform .18s ease;
+      flex: 0 0 auto;
     }
     details[open] .chev{ transform: rotate(180deg); }
 
-    /* Form */
     .form-wrap{
       display:grid;
       grid-template-columns: 1fr .9fr;
       gap: 14px;
       align-items: start;
+      min-width: 0;
     }
-    .form-card{ padding: 18px; }
+    .form-card{ padding: 18px; min-width: 0; }
     .form-card h3{
       margin: 0 0 10px;
       font-size: 16px;
@@ -877,11 +893,13 @@
       display:grid;
       gap: 12px;
       margin-top: 12px;
+      min-width: 0;
     }
     .field{
       display:flex;
       flex-direction: column;
       gap: 7px;
+      min-width: 0;
     }
     label{
       font-size: 12px;
@@ -899,6 +917,7 @@
       outline: none;
       font-size: 13px;
       transition: border-color .18s ease, background .18s ease;
+      min-width: 0;
     }
     input::placeholder{ color: rgba(255,255,255,.42); }
     input:focus, select:focus{
@@ -909,6 +928,7 @@
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      min-width: 0;
     }
     .consent{
       display:flex;
@@ -917,10 +937,12 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.55;
+      min-width: 0;
     }
     .consent input{
       width: 16px; height: 16px; margin-top: 2px;
       accent-color: var(--orange);
+      flex: 0 0 auto;
     }
     .consent a{
       color: rgba(255,255,255,.88);
@@ -938,18 +960,21 @@
       color: rgba(255,255,255,.92);
       font-size: 13px;
       line-height: 1.7;
+      min-width: 0;
     }
     .success b{ font-weight: 900; }
 
     .side-info{
       padding: 18px;
       display:flex; flex-direction: column; gap: 12px;
+      min-width: 0;
     }
     .side-info .block{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
       padding: 14px;
+      min-width: 0;
     }
     .side-info .block h4{
       margin: 0 0 8px;
@@ -958,12 +983,14 @@
       color: rgba(255,255,255,.90);
       letter-spacing: .01em;
       display:flex; gap: 10px; align-items:center;
+      min-width: 0;
     }
     .side-info .block p{
       margin: 0;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
+      min-width: 0;
     }
     .disclaimer{
       font-size: 11px;
@@ -972,7 +999,6 @@
       margin-top: 6px;
     }
 
-    /* Footer with background video */
     footer{
       position: relative;
       overflow: hidden;
@@ -1010,6 +1036,7 @@
       justify-content:space-between;
       gap: 18px;
       flex-wrap: wrap;
+      min-width: 0;
     }
     .footer-links{
       display:flex;
@@ -1017,6 +1044,7 @@
       flex-wrap: wrap;
       color: var(--muted);
       font-size: 12px;
+      min-width: 0;
     }
     .footer-links a{
       border-bottom: 1px dashed rgba(255,255,255,.25);
@@ -1031,7 +1059,6 @@
       max-width: 66ch;
     }
 
-    /* Reveal animations */
     .reveal{
       opacity: 0;
       transform: translateY(10px);
@@ -1047,7 +1074,6 @@
       50%{ transform: translateY(-6px); }
     }
 
-    /* Mobile sticky CTA */
     .sticky-cta{
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -1065,6 +1091,7 @@
       gap: 10px;
       align-items:center;
       justify-content: space-between;
+      min-width: 0;
     }
     .sticky-cta .txt{
       display:flex;
@@ -1087,7 +1114,6 @@
       text-overflow: ellipsis;
     }
 
-    /* Cookie */
     .cookie{
       position: fixed;
       left: 16px; right: 16px;
@@ -1109,6 +1135,7 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+      min-width: 0;
     }
     .cookie p{
       margin: 0;
@@ -1118,7 +1145,6 @@
       max-width: 74ch;
     }
 
-    /* Responsive */
     @media (max-width: 980px){
       .nav{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
@@ -1134,11 +1160,13 @@
 
       .author-top{
         grid-template-columns: 1fr;
-        justify-items: start;
+        justify-items: stretch;
+        align-items: start;
       }
       .author-photo{
-        width: 180px;
-        max-width: 62vw;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 4;
       }
     }
     @media (max-width: 640px){
@@ -1147,6 +1175,8 @@
       .sticky-cta{ display:block; }
       .hero-media::before{ opacity: .26; }
       .footer-video video{ opacity: .22; }
+      .logo{ height: 32px; }
+      .btn{ padding: 12px 14px; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -1165,11 +1195,7 @@
     <div class="container">
       <div class="header-inner">
         <a class="brand" href="#top" aria-label="NextGen Academy">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-title">
-            <strong>NextGen Academy</strong>
-            <span>Интенсив • Удалёнка • Старт без опыта</span>
-          </span>
+          <img class="logo" src="images/logo.jpg" alt="NextGen Academy" />
         </a>
 
         <nav class="nav" aria-label="Навигация">
@@ -1192,9 +1218,7 @@
   </header>
 
   <main id="top">
-    <!-- HERO -->
     <section class="hero">
-      <!-- Background image behind heading area -->
       <div class="hero-media" aria-hidden="true"></div>
 
       <div class="container">
@@ -1247,11 +1271,8 @@
               <div>
                 <div class="author-top">
                   <div class="author-meta">
-                    <div class="name">Место для имени автора</div>
+                    <div class="name">Автор интенсива</div>
                     <div class="role">Спикер • практик • наставник по старту в онлайне</div>
-                    <div class="note" style="margin-top:10px;">
-                      <b>Фото автора:</b> портрет (вертикальный), файл <b>images/author.jpg</b>.
-                    </div>
                   </div>
 
                   <div class="author-photo" aria-label="Фото автора">
@@ -1278,17 +1299,12 @@
                   </div>
                 </div>
               </div>
-
-              <div class="note">
-                <b>Важно:</b> даты/время легко меняются в настройках страницы (см. скрипт внизу).
-              </div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <!-- WHO -->
     <section id="who">
       <div class="container">
         <div class="section-head reveal">
@@ -1340,7 +1356,6 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills">
       <div class="container">
         <div class="section-head reveal">
@@ -1401,7 +1416,6 @@
       </div>
     </section>
 
-    <!-- BENEFITS -->
     <section id="benefits">
       <div class="container">
         <div class="section-head reveal">
@@ -1446,7 +1460,6 @@
       </div>
     </section>
 
-    <!-- VIDEO -->
     <section id="video">
       <div class="container">
         <div class="section-head reveal">
@@ -1462,8 +1475,8 @@
               <div class="play" id="playVideo" role="button" tabindex="0" aria-label="Открыть видео">
                 <span class="picon"><i data-lucide="play"></i></span>
                 <span class="ptxt">
-                  <b>Вставьте ссылку на видео</b>
-                  <span>В коде: data-video-url="https://…"</span>
+                  <b>Смотреть видео</b>
+                  <span>Откроется в новой вкладке</span>
                 </span>
               </div>
             </div>
@@ -1485,7 +1498,6 @@
       </div>
     </section>
 
-    <!-- PROGRAM -->
     <section id="program">
       <div class="container">
         <div class="section-head reveal">
@@ -1545,7 +1557,6 @@
       </div>
     </section>
 
-    <!-- TRANSFORM -->
     <section id="transform">
       <div class="container">
         <div class="section-head reveal">
@@ -1585,7 +1596,6 @@
       </div>
     </section>
 
-    <!-- REGISTER -->
     <section id="register">
       <div class="container">
         <div class="section-head reveal">
@@ -1635,7 +1645,6 @@
                 <input id="comment" name="comment" type="text" placeholder="Например: работаю в найме / в декрете / студентка" />
               </div>
 
-              <!-- UTM hidden fields -->
               <input type="hidden" name="utm_source" id="utm_source" />
               <input type="hidden" name="utm_medium" id="utm_medium" />
               <input type="hidden" name="utm_campaign" id="utm_campaign" />
@@ -1675,7 +1684,7 @@
           <aside class="glass side-info reveal">
             <div class="block">
               <h4><i data-lucide="calendar-clock"></i> Даты и время</h4>
-              <p><b id="sideDates">13–15 января</b>, <b id="sideTime">20:00 по Астане</b>. Данные можно быстро заменить в настройках страницы.</p>
+              <p><b id="sideDates">13–15 января</b>, <b id="sideTime">20:00 по Астане</b>.</p>
             </div>
 
             <div class="block">
@@ -1697,7 +1706,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq">
       <div class="container">
         <div class="section-head reveal">
@@ -1747,7 +1755,6 @@
   </main>
 
   <footer>
-    <!-- Background video under footer (как на вашем скрине — под самый конец) -->
     <div class="footer-video" aria-hidden="true">
       <video autoplay muted loop playsinline preload="metadata">
         <source src="images/footer-bg.mp4" type="video/mp4" />
@@ -1757,11 +1764,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="brand" style="min-width:auto;">
-          <span class="brand-mark" aria-hidden="true"></span>
-                    <span class="brand-title">
-            <strong>NextGen Academy</strong>
-            <span>Премиальный старт в онлайне</span>
-          </span>
+          <img class="logo" src="images/logo.jpg" alt="NextGen Academy" />
         </div>
 
         <div class="footer-links" aria-label="Ссылки в футере">
@@ -1782,7 +1785,6 @@
     </div>
   </footer>
 
-  <!-- Mobile Sticky CTA -->
   <div class="sticky-cta" aria-label="Быстрая регистрация">
     <div class="inner">
       <div class="txt">
@@ -1796,7 +1798,6 @@
     </div>
   </div>
 
-  <!-- Cookie -->
   <div class="cookie" id="cookie">
     <div class="bar">
       <p>
@@ -1807,34 +1808,20 @@
     </div>
   </div>
 
-  <!-- Icons (Lucide) -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
-    /* =========================
-       QUICK SETTINGS (EDIT HERE)
-       ========================= */
     const SETTINGS = {
       dates: "13–15 января",
       time: "20:00 (Астана)",
       timezoneNote: "20:00 по Астане",
       year: "2026",
-
-      // Background image behind HERO title area:
       heroBgImage: "images/hero-bg.jpg",
-
-      // Footer background video:
       footerVideo: "images/footer-bg.mp4",
-
-      // Bonus link after registration (set your real URL later)
       bonusUrl: "images/bonus.pdf",
-
-      // Optional: link to a video for section "Почему ассистенты на вес золота?"
-      // Example: "https://www.youtube.com/watch?v=VIDEO_ID" or any direct link
       explainerVideoUrl: ""
     };
 
-    // Apply settings to the DOM
     function applySettings(){
       document.getElementById("heroDates").textContent = SETTINGS.dates;
       document.getElementById("heroTime").textContent = SETTINGS.time;
@@ -1847,25 +1834,18 @@
       const datePill = document.getElementById("datePill");
       if(datePill) datePill.innerHTML = `<b>${SETTINGS.dates}</b> • ${SETTINGS.time}`;
 
-      // Set hero bg image (CSS variable)
       document.documentElement.style.setProperty("--hero-bg-image", `url("${SETTINGS.heroBgImage}")`);
 
-      // Set footer video source
       const footerVideo = document.querySelector(".footer-video video source");
       if(footerVideo) footerVideo.setAttribute("src", SETTINGS.footerVideo);
 
-      // Set bonus link
       const bonusLink = document.getElementById("bonusLink");
       if(bonusLink) bonusLink.setAttribute("href", SETTINGS.bonusUrl);
 
-      // Set explainer video link (if provided)
       const videoFrame = document.getElementById("videoFrame");
       if(videoFrame) videoFrame.dataset.videoUrl = SETTINGS.explainerVideoUrl || "";
     }
 
-    /* =========================
-       REVEAL ON SCROLL
-       ========================= */
     const revealEls = [];
     function initReveal(){
       document.querySelectorAll(".reveal").forEach(el => revealEls.push(el));
@@ -1880,9 +1860,6 @@
       revealEls.forEach(el => io.observe(el));
     }
 
-    /* =========================
-       PROGRAM TABS
-       ========================= */
     const PROGRAM = {
       d1: {
         title: "День 1: Понимание профессии + первое задание",
@@ -1943,14 +1920,11 @@
       });
     }
 
-    /* =========================
-       VIDEO OPEN
-       ========================= */
     function openExplainerVideo(){
       const frame = document.getElementById("videoFrame");
       const url = (frame && frame.dataset.videoUrl) ? frame.dataset.videoUrl.trim() : "";
       if(!url){
-        alert("Добавьте ссылку на видео в настройках SETTINGS.explainerVideoUrl");
+        alert("Видео пока недоступно.");
         return;
       }
       window.open(url, "_blank", "noopener");
@@ -1959,107 +1933,238 @@
     function initVideo(){
       const play = document.getElementById("playVideo");
       if(!play) return;
-      play.addEventListener("click", openExplainerVideo);
+      play.addEvent
+Listener("click", openExplainerVideo);
       play.addEventListener("keydown", (e) => {
         if(e.key === "Enter" || e.key === " "){
           e.preventDefault();
           openExplainerVideo();
         }
       });
+
+      // Дополнительно: кликабельная область кадра
+      const frame = document.getElementById("videoFrame");
+      if(frame){
+        frame.addEventListener("click", (e) => {
+          // чтобы клики по элементам внутри не дублировались
+          if(e.target && (e.target.closest && e.target.closest("#playVideo"))) return;
+          openExplainerVideo();
+        });
+      }
     }
 
-    /* =========================
-       FORM SUBMIT (demo)
-       - Replace with your backend / CRM
-       ========================= */
-    function getQueryParam(name){
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name) || "";
-    }
+    function initCookie(){
+      const box = document.getElementById("cookie");
+      const btn = document.getElementById("cookieBtn");
+      if(!box || !btn) return;
 
-    function setUtm(){
-      const fields = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
-      fields.forEach(f => {
-        const el = document.getElementById(f);
-        if(el) el.value = getQueryParam(f);
+      const KEY = "cookieAccepted";
+      const accepted = localStorage.getItem(KEY) === "1";
+      if(accepted) return;
+
+      // Показ через небольшую задержку
+      setTimeout(() => {
+        box.style.display = "block";
+      }, 900);
+
+      btn.addEventListener("click", () => {
+        localStorage.setItem(KEY, "1");
+        box.style.display = "none";
       });
+    }
+
+    function initUTM(){
+      const sp = new URLSearchParams(window.location.search);
+      const map = [
+        ["utm_source","utm_source"],
+        ["utm_medium","utm_medium"],
+        ["utm_campaign","utm_campaign"],
+        ["utm_content","utm_content"],
+        ["utm_term","utm_term"]
+      ];
+
+      map.forEach(([param, id]) => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.value = sp.get(param) || "";
+      });
+    }
+
+    function formatPhone(value){
+      // Маска: +7 (###) ###-##-##
+      const digits = String(value || "").replace(/\D/g, "");
+      // убираем ведущие 7/8 при вводе
+      let d = digits;
+      if(d.startsWith("8")) d = "7" + d.slice(1);
+      if(d.startsWith("7")) d = d.slice(1);
+
+      const a = d.slice(0, 10);
+      let out = "+7";
+      if(a.length > 0) out += " (" + a.slice(0,3);
+      if(a.length >= 3) out += ") ";
+      if(a.length > 3) out += a.slice(3,6);
+      if(a.length >= 6) out += "-";
+      if(a.length > 6) out += a.slice(6,8);
+      if(a.length >= 8) out += "-";
+      if(a.length > 8) out += a.slice(8,10);
+
+      // если ничего не введено — пусто
+      if(!digits) return "";
+      return out;
+    }
+
+    function markInvalid(el, on){
+      if(!el) return;
+      if(on){
+        el.setAttribute("aria-invalid", "true");
+        el.style.borderColor = "rgba(255,122,24,.70)";
+      } else {
+        el.removeAttribute("aria-invalid");
+        el.style.borderColor = "";
+      }
     }
 
     function initForm(){
       const form = document.getElementById("regForm");
       const success = document.getElementById("successBox");
-      if(!form) return;
+      const agree = document.getElementById("agree");
+      if(!form || !success || !agree) return;
+
+      const name = document.getElementById("name");
+      const phone = document.getElementById("phone");
+      const messenger = document.getElementById("messenger");
+      const contact = document.getElementById("contact");
+
+      // Телефонная маска (мягкая)
+      if(phone){
+        phone.addEventListener("input", () => {
+          const caretEnd = phone.selectionStart || phone.value.length;
+          const formatted = formatPhone(phone.value);
+          phone.value = formatted;
+          // стараемся не “ломать” ввод (без сложных вычислений caret)
+          phone.setSelectionRange(caretEnd, caretEnd);
+          markInvalid(phone, false);
+        });
+        phone.addEventListener("blur", () => {
+          // если ввели мало — подсветим
+          const digits = phone.value.replace(/\D/g, "");
+          if(phone.value && digits.length < 11) markInvalid(phone, true);
+        });
+      }
+
+      // Снятие подсветки при вводе
+      [name, messenger, contact].forEach(el => {
+        if(!el) return;
+        el.addEventListener("input", () => markInvalid(el, false));
+        el.addEventListener("change", () => markInvalid(el, false));
+      });
+      agree.addEventListener("change", () => {
+        // просто снимаем подсветку (если была)
+        markInvalid(agree, false);
+      });
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const name = form.querySelector("#name").value.trim();
-        const phone = form.querySelector("#phone").value.trim();
-        const messenger = form.querySelector("#messenger").value;
-        const contact = form.querySelector("#contact").value.trim();
-        const agree = document.getElementById("agree").checked;
+        // Базовая валидация
+        let ok = true;
 
-        if(!name || !phone || !messenger || !contact || !agree){
-          alert("Пожалуйста, заполните обязательные поля и поставьте галочку согласия.");
+        if(name && !name.value.trim()){
+          markInvalid(name, true); ok = false;
+        }
+        if(phone){
+          const digits = phone.value.replace(/\D/g, "");
+          // ожидаем +7 и 10 цифр (итого 11)
+          if(!phone.value.trim() || digits.length < 11){
+            markInvalid(phone, true); ok = false;
+          }
+        }
+        if(messenger && !messenger.value){
+          markInvalid(messenger, true); ok = false;
+        }
+        if(contact && !contact.value.trim()){
+          markInvalid(contact, true); ok = false;
+        }
+        if(!agree.checked){
+          // для чекбокса подсветим через outline
+          agree.style.outline = "2px solid rgba(255,122,24,.75)";
+          agree.style.outlineOffset = "4px";
+          setTimeout(() => {
+            agree.style.outline = "";
+            agree.style.outlineOffset = "";
+          }, 1600);
+          ok = false;
+        }
+
+        if(!ok){
+          // фокус на первое невалидное
+          const first = form.querySelector('[aria-invalid="true"]') || form.querySelector(":invalid");
+          if(first && first.focus) first.focus();
           return;
         }
 
-        // DEMO behavior:
-        // Here you can отправить данные на сервер (fetch) или в Google Forms / CRM
-        // console.log("FORM DATA", Object.fromEntries(new FormData(form).entries()));
-
+        // Здесь можно подключить реальную отправку (fetch) на ваш эндпоинт/CRM.
+        // Сейчас — мягкий “успех” для статического лендинга:
         success.style.display = "block";
-        success.scrollIntoView({ behavior: "smooth", block: "start" });
 
-        // Optional: reset form fields but keep utm
-        // form.reset();
-        // document.getElementById("agree").checked = false;
+        // Можно заблокировать кнопку, чтобы не спамили
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if(submitBtn){
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = ".85";
+          submitBtn.style.cursor = "not-allowed";
+          submitBtn.innerHTML = '<i data-lucide="check"></i> Заявка принята';
+        }
+
+        // Обновим иконки (после изменения кнопки)
+        try{ lucide.createIcons(); } catch(err){}
+
+        // Прокрутка к блоку успеха
+        success.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
 
-    /* =========================
-       COOKIE
-       ========================= */
-    function initCookie(){
-      const key = "nga_cookie_ok";
-      const cookie = document.getElementById("cookie");
-      const btn = document.getElementById("cookieBtn");
-      if(!cookie || !btn) return;
+    function initSticky(){
+      const sticky = document.querySelector(".sticky-cta");
+      const reg = document.getElementById("register");
+      if(!sticky || !reg) return;
 
-      const ok = localStorage.getItem(key);
-      if(!ok){
-        cookie.style.display = "block";
+      function update(){
+        const y = window.scrollY || 0;
+        const regTop = reg.getBoundingClientRect().top;
+        const nearRegister = regTop < 220; // если близко к форме — прячем
+        const shouldShow = y > 260 && !nearRegister;
+
+        // hidden перекрывает display из CSS
+        sticky.hidden = !shouldShow;
       }
 
-      btn.addEventListener("click", () => {
-        localStorage.setItem(key, "1");
-        cookie.style.display = "none";
-      });
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
     }
 
-    /* =========================
-       INIT
-       ========================= */
-    function init(){
+    // Инициализация
+    (function init(){
       applySettings();
-      setUtm();
+
+      // Перезагрузить видео-футер после смены src
+      const v = document.querySelector(".footer-video video");
+      if(v){
+        try{ v.load(); } catch(e){}
+      }
+
+      try{ lucide.createIcons(); } catch(e){}
+
       initReveal();
       initTabs();
+      setProgram("d1");
       initVideo();
-      initForm();
       initCookie();
-
-      // Render icons
-      if(window.lucide) lucide.createIcons();
-
-      // Ensure footer video source is loaded
-      const vid = document.querySelector(".footer-video video");
-      if(vid){
-        vid.load();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
+      initUTM();
+      initForm();
+      initSticky();
+    })();
   </script>
 </body>
 </html>
