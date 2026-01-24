@@ -2130,6 +2130,91 @@
       // 1) Иконки
       if (window.lucide && typeof window.lucide.createIcons === "function") {
         window.lucide.createIcons();
+            // 1.5) Динамические даты (3 дня от "сегодня" по Астане)
+      const ASTANA_TZ = "Asia/Almaty"; // Астана
+
+      function getAstanaTodayUTCDate() {
+        const now = new Date();
+        const parts = new Intl.DateTimeFormat("ru-RU", {
+          timeZone: ASTANA_TZ,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).formatToParts(now);
+
+        const y = Number(parts.find(p => p.type === "year").value);
+        const m = Number(parts.find(p => p.type === "month").value);
+        const d = Number(parts.find(p => p.type === "day").value);
+
+        // календарный день в Астане -> дата в UTC (для безопасного прибавления дней)
+        return new Date(Date.UTC(y, m - 1, d));
+      }
+
+      function addDaysUTC(date, days) {
+        return new Date(date.getTime() + days * 86400000);
+      }
+
+      function get3DaysRangeText() {
+        const base = getAstanaTodayUTCDate();
+        const d0 = base;
+        const d1 = addDaysUTC(base, 1);
+        const d2 = addDaysUTC(base, 2);
+
+        const sameMonth =
+          d0.getUTCFullYear() === d2.getUTCFullYear() &&
+          d0.getUTCMonth() === d2.getUTCMonth();
+
+        const monthPart = new Intl.DateTimeFormat("ru-RU", {
+          timeZone: "UTC",
+          day: "numeric",
+          month: "long",
+        }).formatToParts(d0).find(p => p.type === "month").value;
+
+        if (sameMonth) {
+          return `${d0.getUTCDate()}-${d1.getUTCDate()}-${d2.getUTCDate()} ${monthPart}`;
+        }
+
+        const fmt = new Intl.DateTimeFormat("ru-RU", {
+          timeZone: "UTC",
+          day: "numeric",
+          month: "long",
+        });
+        return `${fmt.format(d0)} • ${fmt.format(d1)} • ${fmt.format(d2)}`;
+      }
+
+      function setIconLineText(el, text) {
+        if (!el) return;
+        const icon = el.querySelector("svg") || el.querySelector("[data-lucide]");
+        if (icon) el.innerHTML = icon.outerHTML + " " + text;
+        else el.textContent = text;
+      }
+
+      const dateStr = get3DaysRangeText();
+      const timeStr = "20:00 по Астане";
+
+      // Хедер (плашка)
+      const pillB = document.querySelector("#datePill b");
+      if (pillB) pillB.textContent = dateStr;
+
+      // Hero badge (даты)
+      const heroDates = document.getElementById("heroDates");
+      if (heroDates) heroDates.textContent = dateStr;
+
+      // Карточка справа (мини-блок "календарь")
+      const miniDateLine = document.querySelector(".author-points .mini:nth-child(1) .t");
+      setIconLineText(miniDateLine, dateStr);
+
+      // Программа справа ("Даты и время" — оранжевая дата)
+      const programDate = document.querySelector(".program-side .stat:nth-child(1) .t > span:last-child");
+      if (programDate) programDate.textContent = dateStr;
+
+      // Блок регистрации справа (жирная дата)
+      const registerDate = document.querySelector("#register .side-info .block:nth-child(1) p b");
+      if (registerDate) registerDate.textContent = dateStr;
+
+      // Sticky CTA снизу (строка с датой/временем)
+      const stickyLine = document.querySelector("#stickyCta .txt span");
+      if (stickyLine) stickyLine.textContent = `${dateStr} • ${timeStr}`;
       }
 
       // 2) Текущий год в футере
