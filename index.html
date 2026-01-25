@@ -1175,6 +1175,115 @@
       margin-top: 6px;
     }
 
+    /* ===== ДОБАВЛЕНО (только для формы в #register, чтобы было как на скрине) ===== */
+    #register .form-card h3{
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(22px, 3.1vw, 34px);
+      line-height: 1.15;
+      text-align: center;
+      margin: 0 0 10px;
+      letter-spacing: .01em;
+    }
+    #register .form-card .form-subtitle{
+      margin: 0;
+      color: rgba(255,255,255,.70);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+    #register .form-card form{
+      margin-top: 18px;
+      gap: 14px;
+    }
+    /* скрываем подписи у обычных полей (как в примере), но НЕ трогаем чекбоксы */
+    #register .form-card .field > label{
+      display: none;
+    }
+    /* оранжевая рамка и крупнее поля только внутри формы регистрации */
+    #register .form-card input,
+    #register .form-card select{
+      border-color: rgba(255,122,24,.35);
+      background: rgba(0,0,0,.28);
+      padding: 16px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+    }
+    #register .form-card input:focus,
+    #register .form-card select:focus{
+      border-color: rgba(255,122,24,.70);
+      background: rgba(0,0,0,.30);
+      box-shadow: 0 0 0 3px rgba(255,122,24,.18);
+    }
+    .phone-combo{
+      display:flex;
+      gap: 10px;
+      align-items: stretch;
+      min-width: 0;
+    }
+    .phone-combo select{
+      width: 132px;
+      flex: 0 0 auto;
+      text-align: left;
+    }
+    .phone-combo input{
+      flex: 1;
+      min-width: 0;
+    }
+    .consents{
+      display:grid;
+      gap: 12px;
+      margin-top: 2px;
+    }
+    /* чекбоксы как на примере */
+    #register .consent input{
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(255,122,24,.65);
+      border-radius: 6px;
+      background: rgba(0,0,0,.18);
+      margin-top: 0px;
+      position: relative;
+      flex: 0 0 auto;
+      cursor: pointer;
+    }
+    #register .consent input:checked{
+      background: rgba(255,122,24,1);
+      border-color: rgba(255,155,47,1);
+      box-shadow: 0 10px 26px rgba(255,122,24,.18);
+    }
+    #register .consent input:checked::after{
+      content:"";
+      position:absolute;
+      left: 7px;
+      top: 3px;
+      width: 6px;
+      height: 11px;
+      border: solid rgba(16, 11, 6, .92);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    /* кнопка как на примере: крупная и на всю ширину */
+    #register .form-card button.btn-primary{
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 16px;
+      font-size: 13px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      justify-content: center;
+    }
+    @media (max-width: 640px){
+      .phone-combo{
+        flex-direction: column;
+      }
+      .phone-combo select{
+        width: 100%;
+      }
+    }
+    /* ===== /ДОБАВЛЕНО ===== */
+
     footer{
       position: relative;
       overflow: hidden;
@@ -1953,69 +2062,63 @@
 
         <div class="form-wrap">
           <div class="glass form-card reveal">
-            <h3>Забронируйте место (бесплатно)</h3>
-            <p style="margin:0; color: var(--muted); font-size: 13px; line-height: 1.7;">
+            <!-- ИЗМЕНЕНО: заголовок формы как на примере -->
+            <h3>Заполни данные, чтобы принять участие на мастер-классе</h3>
+            <p class="form-subtitle">
               После регистрации вы получите инструкции и ссылку на подключение.
               Бонус отправим вместе с подтверждением.
             </p>
 
+            <!-- ИЗМЕНЕНО: поля формы (Email / Имя / Телефон) + 3 галочки -->
             <form id="regForm" autocomplete="on">
-              <div class="row">
-                <div class="field">
-                  <label for="name">Имя</label>
-                  <input id="name" name="name" type="text" placeholder="Например: Алия" required>
-                </div>
-                <div class="field">
-                  <label for="phone">Телефон / WhatsApp</label>
-                  <input id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
-                </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Email" required>
               </div>
 
-              <div class="row">
-                <div class="field">
-                  <label for="status">Вы сейчас</label>
-                  <select id="status" name="status" required>
-                    <option value="" selected disabled>Выберите вариант</option>
-                    <option>Работаю в найме</option>
-                    <option>Студент / выпускник</option>
-                    <option>Мама в декрете</option>
-                    <option>В поиске работы</option>
-                    <option>Другое</option>
+              <div class="field">
+                <label for="name">Имя</label>
+                <input id="name" name="name" type="text" placeholder="Имя" required>
+              </div>
+
+              <div class="field">
+                <label for="phone">Телефон</label>
+                <div class="phone-combo">
+                  <select id="phoneCountry" name="phoneCountry" aria-label="Код страны">
+                    <option value="+7" selected>🇰🇿 +7</option>
+                    <option value="+7">🇷🇺 +7</option>
+                    <option value="+996">🇰🇬 +996</option>
+                    <option value="+998">🇺🇿 +998</option>
                   </select>
-                </div>
-
-                <div class="field">
-                  <label for="city">Город</label>
-                  <input id="city" name="city" type="text" placeholder="Астана / Алматы / ..." required>
+                  <input id="phone" name="phone" type="tel" placeholder="(000) 000-00-00" required>
                 </div>
               </div>
 
-              <div class="field">
-                <label for="messenger">Куда удобнее прислать доступ?</label>
-                <select id="messenger" name="messenger" required>
-                  <option value="" selected disabled>Выберите мессенджер</option>
-                  <option>WhatsApp</option>
-                  <option>Telegram</option>
-                </select>
-              </div>
+              <div class="consents" aria-label="Согласия">
+                <label class="consent">
+                  <input id="consent_pd" name="consent_pd" type="checkbox" required>
+                  <span>
+                    Даю своё согласие на обработку персональных данных
+                  </span>
+                </label>
 
-              <div class="field">
-                <label for="email">Email (необязательно)</label>
-                <input id="email" name="email" type="email" placeholder="name@email.com">
-              </div>
+                <label class="consent">
+                  <input id="consent_offer" name="consent_offer" type="checkbox" required>
+                  <span>
+                    С текстом <a href="offer.html" target="_blank" rel="noopener">Договора-Оферты</a> ознакомлен(-а)
+                  </span>
+                </label>
 
-              <label class="consent">
-                <input id="consent" name="consent" type="checkbox" required>
-                <span>
-                  Нажимая «Зарегистрироваться», вы соглашаетесь с
-                  <a href="offer.html" target="_blank" rel="noopener">публичной офертой</a> и
-                  <a href="pd-consent.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.
-                </span>
-              </label>
+                <label class="consent">
+                  <input id="consent_privacy" name="consent_privacy" type="checkbox" required>
+                  <span>
+                    С <a href="pd-consent.html" target="_blank" rel="noopener">Политикой конфиденциальности</a> ознакомлен(-а)
+                  </span>
+                </label>
+              </div>
 
               <button class="btn btn-primary" type="submit">
-                <i data-lucide="arrow-right"></i>
-                ЗАРЕГИСТРИРОВАТЬСЯ
+                ПРИНЯТЬ УЧАСТИЕ
               </button>
 
               <div class="success" id="successBox">
@@ -2473,26 +2576,23 @@
         ioCta.observe(register);
       }
 
-      // 9) Маска телефона (простая, без библиотек)
+      // 9) Маска телефона (обновлено под селект страны)
       const phone = document.getElementById("phone");
+      const phoneCountry = document.getElementById("phoneCountry");
+
       if (phone) {
         const onlyDigits = (v) => (v || "").replace(/\D+/g, "");
 
         function formatKZRU(d) {
-          // ожидаем +7XXXXXXXXXX (11 цифр с 7)
-          // если пользователь ввёл 8XXXXXXXXXX — заменим на 7
-          if (d.length === 11 && d[0] === "8") d = "7" + d.slice(1);
-          if (d[0] !== "7") d = "7" + d; // мягко подталкиваем к +7
+          // ожидаем 10 цифр (без +7), форматируем (XXX) XXX-XX-XX
+          d = d.slice(0, 10);
+          const c = d.slice(0, 3);
+          const a = d.slice(3, 6);
+          const b = d.slice(6, 8);
+          const e = d.slice(8, 10);
 
-          d = d.slice(0, 11);
-
-          const c = d.slice(1, 4);
-          const a = d.slice(4, 7);
-          const b = d.slice(7, 9);
-          const e = d.slice(9, 11);
-
-          let out = "+7";
-          if (c) out += ` (${c}`;
+          let out = "";
+          if (c) out += `(${c}`;
           if (c.length === 3) out += ")";
           if (a) out += ` ${a}`;
           if (b) out += `-${b}`;
@@ -2500,17 +2600,27 @@
           return out;
         }
 
-        const onInput = () => {
+        function onInput() {
+          const cc = (phoneCountry?.value || "+7").trim();
           const d = onlyDigits(phone.value);
+
           if (!d) {
             phone.value = "";
             return;
           }
-          phone.value = formatKZRU(d);
-        };
+
+          if (cc === "+7") phone.value = formatKZRU(d);
+          else phone.value = d; // для других стран — без агрессивной маски
+        }
 
         phone.addEventListener("input", onInput);
         phone.addEventListener("blur", onInput);
+
+        phoneCountry?.addEventListener("change", () => {
+          // мягко очищаем поле при смене страны, чтобы маска не путала
+          phone.value = "";
+          phone.focus();
+        });
       }
 
       // 10) Отправка формы (демо + опциональная отправка на webhook)
@@ -2533,25 +2643,31 @@
       form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const consent = document.getElementById("consent");
-        if (consent && !consent.checked) {
-          consent.focus();
+        // 3 согласия
+        const c1 = document.getElementById("consent_pd");
+        const c2 = document.getElementById("consent_offer");
+        const c3 = document.getElementById("consent_privacy");
+        const firstUnchecked = [c1, c2, c3].find((x) => x && !x.checked);
+        if (firstUnchecked) {
+          firstUnchecked.focus();
           return;
         }
 
+        const cc = (document.getElementById("phoneCountry")?.value || "+7").trim();
+
         const payload = {
-          name: (document.getElementById("name")?.value || "").trim(),
-          phone: (document.getElementById("phone")?.value || "").trim(),
-          status: (document.getElementById("status")?.value || "").trim(),
-          city: (document.getElementById("city")?.value || "").trim(),
-          messenger: (document.getElementById("messenger")?.value || "").trim(),
           email: (document.getElementById("email")?.value || "").trim(),
+          name: (document.getElementById("name")?.value || "").trim(),
+          phone: `${cc} ${(document.getElementById("phone")?.value || "").trim()}`.trim(),
+          consent_pd: !!c1?.checked,
+          consent_offer: !!c2?.checked,
+          consent_privacy: !!c3?.checked,
           source: "NextGen Academy landing",
           ts: new Date().toISOString(),
         };
 
         // Минимальная проверка
-        if (!payload.name || !payload.phone || !payload.status || !payload.city || !payload.messenger) {
+        if (!payload.email || !payload.name || !payload.phone) {
           return;
         }
 
