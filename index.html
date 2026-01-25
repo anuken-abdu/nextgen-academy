@@ -1263,35 +1263,51 @@
     }
 
     /* ===== ИЗМЕНЕНО ТОЛЬКО ЗДЕСЬ: чекбоксы меньше + галочка ровно по центру ===== */
-    #register .consent input{
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;          /* было 22px */
-      height: 18px;         /* было 22px */
-      border: 2px solid rgba(255,122,24,.65);
-      border-radius: 5px;   /* было 6px */
-      background: rgba(0,0,0,.18);
-      margin-top: 2px;      /* чуть ровнее по строке */
-      position: relative;
-      flex: 0 0 auto;
-      cursor: pointer;
-    }
-    #register .consent input:checked{
-      background: rgba(255,122,24,1);
-      border-color: rgba(255,155,47,1);
-      box-shadow: 0 10px 26px rgba(255,122,24,.18);
-    }
-    #register .consent input:checked::after{
-      content:"";
-      position:absolute;
-      left: 50%;
-      top: 48%;
-      width: 5px;
-      height: 9px;
-      border: solid rgba(16, 11, 6, .92);
-      border-width: 0 2px 2px 0;
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
+    /* Чекбоксы в регистрации: меньше, по центру, включены по умолчанию */
+  #register .consent{
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 11px;          /* текст меньше */
+  line-height: 1.35;        /* компактнее */
+   }
+
+  #register .consent input{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;              /* квадрат меньше */
+  height: 14px;
+  border: 1.6px solid rgba(255,122,24,.65);
+  border-radius: 4px;
+  background: rgba(0,0,0,.18);
+  margin-top: 2px;
+  position: relative;
+  flex: 0 0 auto;
+  cursor: pointer;
+  }
+
+  #register .consent input:checked{
+  background: rgba(255,122,24,1);
+  border-color: rgba(255,155,47,1);
+  box-shadow: 0 8px 18px rgba(255,122,24,.16);
+  }
+
+  #register .consent input:checked::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 7px;
+  border: solid rgba(16, 11, 6, .92);
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -55%) rotate(45deg); /* ровнее по центру */
+  }
+
+/* ссылки в чекбоксах — аккуратнее */
+  #register .consent a{
+  font-size: 11px;
+  text-underline-offset: 2px;
+  }
     /* ===== /ИЗМЕНЕНО ===== */
 
     /* кнопка как на примере: крупная и на всю ширину */
@@ -2111,20 +2127,14 @@
 
               <div class="consents">
                 <label class="consent">
-                  <input type="checkbox" name="c1" checked required />
+                  <input type="checkbox" name="c1" checked required checked/>
                   <span>Я даю согласие на обработку персональных данных согласно <a href="pd-consent.html" target="_blank" rel="noopener">политике</a></span>
                 </label>
 
                 <label class="consent">
-                  <input type="checkbox" name="c2" checked required />
+                  <input type="checkbox" name="policy" required checked>
                   <span>Я принимаю условия <a href="offer.html" target="_blank" rel="noopener"><b>публичной оферты</b></a></span>
                 </label>
-
-                <label class="consent">
-                  <input type="checkbox" name="c3" checked required />
-                  <span>Я подтверждаю корректность введённых данных и согласна получать инструкции по участию на указанный Email/WhatsApp</span>
-                </label>
-              </div>
 
               <button class="btn btn-primary" type="submit">
                 ЗАРЕГИСТРИРОВАТЬСЯ
