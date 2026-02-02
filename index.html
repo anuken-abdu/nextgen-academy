@@ -25,16 +25,20 @@
       --stroke: rgba(255,255,255,.14);
       --stroke2: rgba(255,255,255,.10);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.55);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.56);
       --orange:#ff7a18;
       --orange2:#ff9b2f;
+      --green:#1fd17a;
+      --green2:#10b981;
+
       --shadow: 0 20px 60px rgba(0,0,0,.55);
       --blur: blur(16px);
       --radius: 22px;
       --radius2: 18px;
       --pad: clamp(18px, 3.6vw, 44px);
       --max: 1180px;
+
       --hero-bg-image: url("images/hero-bg.jpg");
     }
 
@@ -55,6 +59,21 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x: hidden;
       width: 100%;
+      line-height: 1.75;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== ГЛОБАЛЬНАЯ ТИПОГРАФИКА / SPACING ===== */
+    p{ margin: 0 0 14px; }
+    p:last-child{ margin-bottom: 0; }
+    ul, ol{ margin: 0 0 14px; }
+    li{ margin: 8px 0; }
+    h1, h2, h3, h4{
+      margin: 0 0 14px;
+      line-height: 1.22;
+      letter-spacing: .01em;
     }
 
     .bg-grid{
@@ -136,7 +155,7 @@
       font-size: 12px;
       white-space: nowrap;
     }
-    .pill b{ color: rgba(255,255,255,.88); font-weight: 700; }
+    .pill b{ color: rgba(255,255,255,.88); font-weight: 800; }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap: 10px;
@@ -146,7 +165,7 @@
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(14px);
       color: rgba(255,255,255,.92);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
       cursor: pointer;
       transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
@@ -178,16 +197,46 @@
       background: rgba(16, 11, 6, .85);
       opacity: .75;
     }
-
     .btn-ghost{ background: transparent; }
 
+    /* ===== СЕКЦИОННЫЕ ВНУТРЕННИЕ ЗАГОЛОВКИ В РАМКАХ ===== */
+    section{
+      padding: clamp(34px, 6vw, 74px) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .glass{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+    }
+    .section-card{
+      padding: clamp(18px, 3vw, 26px);
+      margin-bottom: 14px;
+    }
+    .section-title{
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(22px, 2.9vw, 34px);
+      line-height: 1.14;
+      margin-bottom: 12px;
+    }
+    .section-sub{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 78ch;
+      margin: 0;
+    }
+
+    /* ===== HERO ===== */
     .hero{
       padding: clamp(34px, 6vw, 70px) 0 clamp(30px, 6vw, 64px);
       position: relative;
       overflow: hidden;
       overflow: clip;
     }
-
     .hero-media{
       position:absolute;
       inset: 0;
@@ -217,9 +266,9 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns: 1.2fr .8fr;
       gap: clamp(16px, 3vw, 28px);
-      align-items: stretch;
+      align-items: start;
       position: relative;
       z-index: 1;
       min-width: 0;
@@ -235,19 +284,22 @@
       font-size: 12px;
       letter-spacing: .02em;
       width: fit-content;
+      line-height: 1.4;
+      margin-bottom: 14px;
     }
     .kicker .spark{
       width: 10px; height: 10px;
       border-radius: 3px;
       background: linear-gradient(135deg, var(--orange), var(--orange2));
       box-shadow: 0 0 24px rgba(255,122,24,.32);
+      flex: 0 0 auto;
     }
 
     .hero h1{
       font-family: Unbounded, Manrope, system-ui, sans-serif;
-      font-size: clamp(26px, 3.2vw, 46px);
-      line-height: 1.1;
-      margin: 14px 0 12px;
+      font-size: clamp(28px, 3.2vw, 46px);
+      line-height: 1.08;
+      margin: 0 0 16px;
       letter-spacing: .01em;
       position: relative;
     }
@@ -262,7 +314,6 @@
       z-index: -1;
       box-shadow: 0 18px 60px rgba(0,0,0,.45);
     }
-
     .hero h1 .accent{
       background: linear-gradient(135deg, rgba(255,122,24,1), rgba(255,155,47,1));
       -webkit-background-clip: text;
@@ -270,19 +321,20 @@
       color: transparent;
       text-shadow: 0 0 30px rgba(255,122,24,.12);
     }
+
     .hero p.lead{
-      margin: 0;
+      margin: 0 0 18px;
       color: var(--muted);
       font-size: clamp(14px, 1.35vw, 16px);
-      line-height: 1.7;
-      max-width: 64ch;
+      line-height: 1.85;
+      max-width: 68ch;
     }
 
     .hero-meta{
       display:flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 18px 0 18px;
+      margin: 18px 0 22px;
     }
     .badge{
       display:inline-flex; align-items:center; gap: 10px;
@@ -294,181 +346,208 @@
       font-size: 12px;
       backdrop-filter: blur(14px);
       white-space: nowrap;
+      line-height: 1.4;
     }
     .badge i{ opacity: .92; }
 
     .hero-cta{
       display:flex;
-      align-items:center;
-      gap: 12px;
+      align-items:flex-start;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      margin-top: 10px;
     }
     .sub-cta{
-      display:flex; flex-direction:column; gap: 4px;
+      display:flex; flex-direction:column; gap: 6px;
       color: var(--muted);
       font-size: 12px;
+      line-height: 1.55;
+      padding-top: 2px;
     }
+    .sub-cta span{ margin: 0; }
     .sub-cta a{
-      display:inline-flex; align-items:center; gap: 8px;
-      color: rgba(255,255,255,.86);
-      opacity: .95;
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      color: rgba(255,255,255,.88);
+      opacity: .96;
       transition: opacity .2s ease, transform .2s ease;
-      width: fit-content;
+      max-width: 52ch;
     }
     .sub-cta a:hover{ opacity: 1; transform: translateY(-1px); }
+    .sub-cta a i{ margin-top: 2px; flex: 0 0 auto; }
 
-    .hero-card{
-      position: relative;
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: var(--shadow);
-      backdrop-filter: var(--blur);
+    /* Фото эксперта — компактно, без обрезки на мобилке */
+    .expert{
       padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(520px 320px at 22% 10%, rgba(255,122,24,.20), transparent 60%),
+        rgba(255,255,255,.04);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
       overflow: hidden;
       min-width: 0;
     }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(420px 220px at 20% 10%, rgba(255,122,24,.25), transparent 60%),
-        radial-gradient(420px 240px at 90% 20%, rgba(255,155,47,.14), transparent 60%);
-      opacity: .9;
-      z-index: 0;
-      pointer-events: none;
+    .expert .cap{
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      margin-bottom: 12px;
     }
-    .hero-card > *{ position: relative; z-index: 1; }
-
-    .author{
-      display:flex; flex-direction:column; gap: 14px;
-      height: 100%;
-      justify-content: space-between;
-      min-width: 0;
-    }
-
-    .author-top{
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
-      min-width: 0;
-    }
-    .author-photo{
-      width: 138px;
-      aspect-ratio: 3 / 4;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.25);
-      overflow:hidden;
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      flex: 0 0 auto;
-    }
-    .author-photo img{
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: 50% 30%;
-      display:block;
-      transform: scale(1.02);
-    }
-    .author-meta{
-      display:flex; flex-direction:column; gap: 6px;
-      min-width: 0;
-    }
-    .author-meta .name{
+    .expert .cap .t{
       font-weight: 900;
-      letter-spacing: .01em;
-      font-size: 15px;
-      line-height: 1.2;
+      font-size: 13px;
+      color: rgba(255,255,255,.92);
+      margin: 0;
     }
-    .author-meta .role{
+    .expert .cap .s{
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.4;
+      margin: 0;
+      line-height: 1.55;
     }
-
-    .author-points{
+    .expert-photo{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      overflow: hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px;
+    }
+    .expert-photo img{
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: contain; /* важно: без обрезки */
+      display:block;
+    }
+    .expert-points{
+      margin-top: 14px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 6px;
     }
-    .mini{
+    .expert-pill{
       border-radius: 16px;
       padding: 12px 12px;
       border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .expert-pill b{ font-weight: 900; }
+
+    /* ===== WHO (плашки-теги) ===== */
+    .tags{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(14px);
-      min-height: 78px;
-    }
-    .mini .t{
       color: rgba(255,255,255,.90);
       font-weight: 800;
-      font-size: 12px;
-      display:flex; align-items:center; gap: 8px;
-    }
-    .mini .d{
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    section{
-      padding: clamp(34px, 6vw, 74px) 0;
-      position: relative;
-      z-index: 1;
-    }
-    .section-head{
-      display:flex; align-items:flex-end; justify-content:space-between; gap: 16px;
-      margin-bottom: clamp(16px, 3vw, 22px);
-    }
-    .section-head h2{
-      margin: 0;
-      font-family: Unbounded, Manrope, system-ui, sans-serif;
-      font-size: clamp(18px, 2.2vw, 28px);
-      letter-spacing: .01em;
-      line-height: 1.2;
-    }
-    .section-head p{
-      margin: 0;
-      color: var(--muted);
       font-size: 13px;
-      line-height: 1.6;
-      max-width: 62ch;
+      line-height: 1.35;
+      white-space: nowrap;
     }
+    .tag i{ opacity: .92; }
 
-    .glass{
+    /* ===== MANIFEST ===== */
+    .manifest{
+      padding: clamp(18px, 3vw, 26px);
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,155,47,.38);
+      background:
+        radial-gradient(520px 280px at 16% 0%, rgba(255,122,24,.18), transparent 60%),
+        rgba(255,255,255,.04);
       backdrop-filter: var(--blur);
       box-shadow: var(--shadow);
+      margin-top: 14px;
+    }
+    .manifest h3{
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      margin-bottom: 12px;
+    }
+    .manifest p{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0;
+      max-width: 85ch;
     }
 
+    /* ===== TARGET AUDIENCE BLOCK ===== */
+    .audience{
+      margin-top: 14px;
+      padding: clamp(18px, 3vw, 26px);
+    }
+    .audience h3{
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      margin-bottom: 12px;
+    }
+    .audience p{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 0 14px;
+      max-width: 85ch;
+    }
+    .audience ul{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    /* “Рекомендую всё отложить” — отдельный текстовый блок без рамки */
+    .recommend{
+      margin-top: 18px;
+    }
+    .recommend h3{
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(16px, 2vw, 22px);
+      margin-bottom: 10px;
+    }
+    .recommend p{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 0 10px;
+    }
+    .recommend ul{
+      color: rgba(255,255,255,.84);
+      padding-left: 18px;
+      margin: 0;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    /* ===== BENEFITS GRID ===== */
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    .grid-2{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .grid-4{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
     .card{
       border-radius: var(--radius2);
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(14px);
-      padding: 18px;
+      padding: 20px;
       position: relative;
       overflow: hidden;
       transition: transform .20s ease, border-color .20s ease, background .20s ease;
@@ -493,40 +572,38 @@
     .card:hover:before{ opacity: 1; }
 
     .card .icon{
-      width: 38px; height: 38px;
+      width: 40px; height: 40px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
       display:flex; align-items:center; justify-content:center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       box-shadow: 0 16px 32px rgba(0,0,0,.35);
     }
-    .card .icon i{ color: rgba(255,255,255,.92); }
     .card h3{
-      margin: 0 0 8px;
-      font-size: 14px;
+      margin: 0 0 10px;
+      font-size: 15px;
       letter-spacing: .01em;
-      font-weight: 800;
+      font-weight: 900;
       line-height: 1.35;
       color: rgba(255,255,255,.92);
     }
     .card p{
       margin: 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
+      font-size: 14px;
+      line-height: 1.85;
     }
 
-    /* ===== SKILLS (блок "Навыки") ===== */
-    .skills{
+    /* ===== SKILLS: БЫТ → ПРОФЕССИЯ + зеленый доход + мобильная карусель ===== */
+    .skills-wrap{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.05fr .95fr;
       gap: 14px;
       align-items: start;
       min-width: 0;
     }
 
-    /* ВАЖНО: делаем список навыков GRID, чтобы gap работал стабильно на телефонах (в т.ч. Safari) */
     .skill-list{
       display:grid;
       gap: 12px;
@@ -538,79 +615,140 @@
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(14px);
-      padding: 14px 14px;
+      padding: 16px;
       display:grid;
-      grid-template-columns: 1.2fr 1.2fr .6fr;
       gap: 12px;
+      min-width: 0;
+    }
+
+    .skill-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .skill-title{
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1.35;
+      color: rgba(255,255,255,.92);
+      margin: 0;
+      min-width: 0;
+    }
+    .skill-title i{ margin-top: 2px; opacity: .95; flex: 0 0 auto; }
+
+    .skill-pairs{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
       align-items: start;
       min-width: 0;
     }
-
-    .skill .k{
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: .01em;
-      color: rgba(255,255,255,.92);
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
+    .pair{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      padding: 12px;
       min-width: 0;
     }
-    .skill .k i{
-      margin-top: 2px;
-      opacity: .95;
-    }
-
-    .skill .v{
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.55;
-      min-width: 0;
-    }
-
-    .skill .pay{
-      display:flex;
-      justify-content:flex-end;
+    .pair .lbl{
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.66);
       font-weight: 900;
-      color: rgba(255,255,255,.92);
-      font-size: 12px;
-      text-align:right;
-      white-space: nowrap;
+      margin: 0 0 8px;
+    }
+    .pair .txt{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .pair-arrow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding-top: 14px;
+      color: rgba(255,255,255,.78);
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1;
+      opacity: .9;
+    }
+
+    .skill-foot{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
       min-width: 0;
     }
-    .skill .pay span{
+    .skill-foot .ability{
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 800;
+      min-width: 0;
+    }
+    .skill-foot .pay{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,122,24,.35);
-      background: rgba(255,122,24,.12);
-      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(31,209,122,.50);
+      background: rgba(31,209,122,.14);
+      color: rgba(255,255,255,.94);
+      font-weight: 900;
+      font-size: 12px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 24px rgba(16,185,129,.10);
     }
 
-    /* Мобилка: карточка навыка становится в 1 колонку,
-       а плашка дохода аккуратно фиксируется справа сверху */
+    /* Мобильная карусель: горизонтальный скролл + snap */
     @media (max-width: 640px){
+      .skill-list{
+        display:flex;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+      }
       .skill{
+        flex: 0 0 88%;
+        scroll-snap-align: start;
+      }
+      .skill-pairs{
         grid-template-columns: 1fr;
-        gap: 10px;
-        position: relative;
-        padding-top: 52px; /* место под плашку дохода */
       }
-
-      .skill .pay{
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        justify-content: flex-end;
+      .pair-arrow{
+        padding-top: 0;
+        justify-content:flex-start;
       }
-
-      .skill .pay span{
-        white-space: nowrap;
+      .pair-arrow:before{
+        content:"Трансформация";
+        font-size: 11px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,.52);
+        font-weight: 900;
+        margin-right: 10px;
       }
     }
 
     .skills-aside{
       border-radius: var(--radius);
-      padding: 18px;
+      padding: 20px;
       border: 1px solid rgba(255,255,255,.14);
       background:
         radial-gradient(420px 260px at 25% 0%, rgba(255,122,24,.22), transparent 60%),
@@ -620,32 +758,31 @@
       min-width: 0;
     }
     .skills-aside h3{
-      margin: 0 0 10px;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .01em;
-      color: rgba(255,255,255,.92);
+      margin: 0 0 12px;
+      font-family: Unbounded, Manrope, system-ui, sans-serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.2;
     }
     .skills-aside p{
       margin: 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 14px;
+      line-height: 1.9;
     }
     .skills-aside .big{
-      margin-top: 14px;
+      margin-top: 16px;
       padding: 14px 14px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
       color: rgba(255,255,255,.88);
-      font-weight: 800;
-      line-height: 1.5;
-    }
-    .skills-aside .big span{
-      color: var(--orange2);
+      font-weight: 900;
+      line-height: 1.6;
+      font-size: 13px;
+      letter-spacing: .02em;
     }
 
+    /* ===== VIDEO ===== */
     .video{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -734,9 +871,26 @@
       text-overflow: ellipsis;
     }
 
+    .year-badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,155,47,.40);
+      background: rgba(255,122,24,.12);
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      font-size: 12px;
+      margin-left: 10px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    /* ===== PROGRAM ===== */
     .tabs{
       display:flex; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 14px;
+      margin: 14px 0 14px;
     }
     .tab{
       display:inline-flex; align-items:center; gap: 10px;
@@ -748,7 +902,7 @@
       cursor: pointer;
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
       user-select:none;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
     }
     .tab:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.20); }
@@ -763,22 +917,22 @@
       align-items: stretch;
       min-width: 0;
     }
-    .program-main{ padding: 18px; min-width: 0; }
+    .program-main{ padding: 20px; min-width: 0; }
     .program-main h3{
-      margin: 0 0 10px;
+      margin: 0 0 14px;
       font-size: 16px;
       font-weight: 900;
       letter-spacing: .01em;
       color: rgba(255,255,255,.92);
+      line-height: 1.35;
     }
     .program-main ul{
-      margin: 0;
+      margin: 0 0 14px;
       padding-left: 18px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 14px;
+      line-height: 1.9;
     }
-    .program-main li{ margin: 6px 0; }
     .bonus{
       margin-top: 14px;
       border-radius: 18px;
@@ -786,13 +940,13 @@
       border: 1px solid rgba(255,155,47,.40);
       background: rgba(255,122,24,.12);
       color: rgba(255,255,255,.92);
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 14px;
+      line-height: 1.85;
     }
     .bonus b{ color: rgba(255,255,255,.96); font-weight: 900; }
 
     .program-side{
-      padding: 18px;
+      padding: 20px;
       display:flex;
       flex-direction: column;
       justify-content: space-between;
@@ -815,10 +969,10 @@
       min-width: 0;
     }
     .stat .v{
-      margin-top: 8px;
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
+      font-size: 14px;
+      line-height: 1.85;
     }
     .highlight{
       display:inline-flex; align-items:center; gap: 10px;
@@ -830,31 +984,33 @@
       color: rgba(255,255,255,.90);
       font-size: 12px;
       line-height: 1.4;
+      font-weight: 900;
+      width: fit-content;
     }
 
+    /* ===== TRANSFORM (галерея оставлена как есть) ===== */
     .transform{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       min-width: 0;
     }
-    .list{ padding: 18px; min-width: 0; }
+    .list{ padding: 20px; min-width: 0; }
     .list h3{
-      margin: 0 0 10px;
-      font-size: 14px;
+      margin: 0 0 12px;
+      font-size: 16px;
       font-weight: 900;
       letter-spacing: .01em;
+      line-height: 1.35;
     }
     .list ul{
-      margin:0;
+      margin:0 0 14px;
       padding-left: 18px;
       color: var(--muted);
-      line-height: 1.85;
-      font-size: 13px;
+      line-height: 1.9;
+      font-size: 14px;
     }
-    .list li{ margin: 6px 0; }
 
-    /* ===== TRANSFORM: рамки для фото/галерея ===== */
     .transform-media{ margin-top: 14px; }
 
     .photo-frame{
@@ -951,7 +1107,7 @@
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(14px);
       color: rgba(255,255,255,.92);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
       cursor: pointer;
       transition: transform .18s ease, border-color .18s ease, background .18s ease;
@@ -1005,52 +1161,7 @@
       }
     }
 
-    .faq{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      min-width: 0;
-    }
-    details.faq-item{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      backdrop-filter: blur(14px);
-      padding: 14px 16px;
-      transition: border-color .18s ease, background .18s ease;
-      min-width: 0;
-    }
-    details.faq-item[open]{
-      border-color: rgba(255,122,24,.45);
-      background: rgba(255,122,24,.08);
-    }
-    .faq-item summary{
-      cursor: pointer;
-      list-style: none;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 12px;
-      font-weight: 900;
-      color: rgba(255,255,255,.92);
-      font-size: 13px;
-      min-width: 0;
-    }
-    .faq-item summary::-webkit-details-marker{ display:none; }
-    .faq-item .ans{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.75;
-      max-width: 90ch;
-    }
-    .chev{
-      opacity: .85;
-      transition: transform .18s ease;
-      flex: 0 0 auto;
-    }
-    details[open] .chev{ transform: rotate(180deg); }
-
+    /* ===== FORM ===== */
     .form-wrap{
       display:grid;
       grid-template-columns: 1fr .9fr;
@@ -1058,17 +1169,11 @@
       align-items: start;
       min-width: 0;
     }
-    .form-card{ padding: 18px; min-width: 0; }
-    .form-card h3{
-      margin: 0 0 10px;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: .01em;
-    }
+    .form-card{ padding: 20px; min-width: 0; }
     form{
       display:grid;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 14px;
+      margin-top: 18px;
       min-width: 0;
     }
     .field{
@@ -1080,102 +1185,30 @@
     label{
       font-size: 12px;
       color: rgba(255,255,255,.86);
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: .01em;
     }
     input, select{
       width: 100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
+      padding: 16px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,122,24,.35);
+      background: rgba(0,0,0,.28);
       color: rgba(255,255,255,.92);
       outline: none;
-      font-size: 13px;
-      transition: border-color .18s ease, background .18s ease;
+      font-size: 14px;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
       min-width: 0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
     }
     input::placeholder{ color: rgba(255,255,255,.42); }
     input:focus, select:focus{
-      border-color: rgba(255,122,24,.55);
-      background: rgba(0,0,0,.26);
-    }
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      min-width: 0;
-    }
-    .consent{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.55;
-      min-width: 0;
-    }
-    .consent input{
-      width: 16px; height: 16px; margin-top: 2px;
-      accent-color: var(--orange);
-      flex: 0 0 auto;
-    }
-    .consent a{
-      color: rgba(255,255,255,.88);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      border-color: rgba(255,122,24,.70);
+      background: rgba(0,0,0,.30);
+      box-shadow: 0 0 0 3px rgba(255,122,24,.18), inset 0 1px 0 rgba(255,255,255,.06);
     }
 
-    .success{
-      display:none;
-      margin-top: 12px;
-      border-radius: 18px;
-      padding: 14px;
-      border: 1px solid rgba(255,155,47,.45);
-      background: rgba(255,122,24,.12);
-      color: rgba(255,255,255,.92);
-      font-size: 13px;
-      line-height: 1.7;
-      min-width: 0;
-    }
-    .success b{ font-weight: 900; }
-
-    .side-info{
-      padding: 18px;
-      display:flex; flex-direction: column; gap: 12px;
-      min-width: 0;
-    }
-    .side-info .block{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-      padding: 14px;
-      min-width: 0;
-    }
-    .side-info .block h4{
-      margin: 0 0 8px;
-      font-size: 12px;
-      font-weight: 900;
-      color: rgba(255,255,255,.90);
-      letter-spacing: .01em;
-      display:flex; gap: 10px; align-items:center;
-      min-width: 0;
-    }
-    .side-info .block p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-      min-width: 0;
-    }
-    .disclaimer{
-      font-size: 11px;
-      color: rgba(255,255,255,.55);
-      line-height: 1.6;
-      margin-top: 6px;
-    }
-
-    /* ===== ДОБАВЛЕНО (только для формы в #register, чтобы было как на скрине) ===== */
+    /* Заголовок формы — как на макете */
     #register .form-card h3{
       font-family: Unbounded, Manrope, system-ui, sans-serif;
       font-size: clamp(22px, 3.1vw, 34px);
@@ -1188,35 +1221,15 @@
       margin: 0;
       color: rgba(255,255,255,.70);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
       text-align: center;
-    }
-    #register .form-card form{
-      margin-top: 18px;
-      gap: 14px;
     }
     /* скрываем подписи у обычных полей (как в примере), но НЕ трогаем чекбоксы */
     #register .form-card .field > label{
       display: none;
     }
-    /* оранжевая рамка и крупнее поля только внутри формы регистрации */
-    #register .form-card input,
-    #register .form-card select{
-      border-color: rgba(255,122,24,.35);
-      background: rgba(0,0,0,.28);
-      padding: 16px 16px;
-      border-radius: 16px;
-      font-size: 14px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-    }
-    #register .form-card input:focus,
-    #register .form-card select:focus{
-      border-color: rgba(255,122,24,.70);
-      background: rgba(0,0,0,.30);
-      box-shadow: 0 0 0 3px rgba(255,122,24,.18), inset 0 1px 0 rgba(255,255,255,.06);
-    }
 
-    /* Телефон: одно поле (3-е поле), префикс внутри */
+    /* Телефон: одно поле, префикс внутри */
     #register .phone-single{
       position: relative;
       width: 100%;
@@ -1241,39 +1254,26 @@
       padding-left: 96px; /* место под "🇰🇿 +7" */
     }
 
-    .phone-combo{
-      display:flex;
-      gap: 10px;
-      align-items: stretch;
-      min-width: 0;
-    }
-    .phone-combo select{
-      width: 132px;
-      flex: 0 0 auto;
-      text-align: left;
-    }
-    .phone-combo input{
-      flex: 1;
-      min-width: 0;
-    }
     .consents{
       display:grid;
       gap: 12px;
       margin-top: 2px;
     }
 
-    /* ===== ИЗМЕНЕНО ТОЛЬКО ЗДЕСЬ: микро-текст + микро-чекбоксы + авто-галочка внутри квадрата ===== */
+    /* ЧЕКБОКСЫ: меньше + строгий текст (без добавлений) */
     #register .consent{
+      display:flex;
       gap: 10px;
       align-items: flex-start;
       font-size: 11px;
       line-height: 1.35;
+      color: rgba(255,255,255,.78);
     }
     #register .consent input{
       -webkit-appearance: none;
       appearance: none;
-      width: 14px;
-      height: 14px;
+      width: 12px;   /* уменьшили */
+      height: 12px;  /* уменьшили */
       border: 1.6px solid rgba(255,122,24,.65);
       border-radius: 4px;
       background: rgba(0,0,0,.18);
@@ -1285,44 +1285,71 @@
     #register .consent input:checked{
       background: rgba(255,122,24,1);
       border-color: rgba(255,155,47,1);
-      box-shadow: 0 8px 18px rgba(255,122,24,.16);
+      box-shadow: 0 8px 18px rgba(255,122,24,.12);
     }
     #register .consent input:checked::after{
       content:"";
       position:absolute;
       left: 50%;
       top: 50%;
-      width: 4px;
-      height: 7px;
+      width: 3px;
+      height: 6px;
       border: solid rgba(16, 11, 6, .92);
       border-width: 0 2px 2px 0;
       transform: translate(-50%, -55%) rotate(45deg);
     }
-    #register .consent a{
+
+    .disclaimer{
       font-size: 11px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.6;
+      margin-top: 6px;
     }
-    /* ===== /ИЗМЕНЕНО ===== */
 
-    /* кнопка как на примере: крупная и на всю ширину */
-    #register .form-card button.btn-primary{
-      width: 100%;
-      padding: 16px 18px;
-      border-radius: 16px;
+    .success{
+      display:none;
+      margin-top: 12px;
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255,155,47,.45);
+      background: rgba(255,122,24,.12);
+      color: rgba(255,255,255,.92);
       font-size: 13px;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      justify-content: center;
+      line-height: 1.7;
+      min-width: 0;
     }
-    @media (max-width: 640px){
-      .phone-combo{
-        flex-direction: column;
-      }
-      .phone-combo select{
-        width: 100%;
-      }
-    }
-    /* ===== /ДОБАВЛЕНО ===== */
+    .success b{ font-weight: 900; }
 
+    .side-info{
+      padding: 20px;
+      display:flex; flex-direction: column; gap: 12px;
+      min-width: 0;
+    }
+    .side-info .block{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      padding: 14px;
+      min-width: 0;
+    }
+    .side-info .block h4{
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(255,255,255,.90);
+      letter-spacing: .01em;
+      display:flex; gap: 10px; align-items:center;
+      min-width: 0;
+    }
+    .side-info .block p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+      min-width: 0;
+    }
+
+    /* ===== FOOTER ===== */
     footer{
       position: relative;
       overflow: hidden;
@@ -1379,27 +1406,22 @@
     .copy{
       color: rgba(255,255,255,.55);
       font-size: 12px;
-      line-height: 1.6;
-      max-width: 66ch;
+      line-height: 1.7;
+      max-width: 72ch;
     }
-
-    /* Линия разработчика */
     .devline{
       margin-top: 10px;
       color: rgba(255,255,255,.60);
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
     .devline a{
       color: rgba(255,255,255,.88);
       border-bottom: 1px dashed rgba(255,255,255,.30);
       padding-bottom: 2px;
     }
-    .devline a:hover{
-      color: rgba(255,255,255,.95);
-      border-bottom-color: rgba(255,255,255,.45);
-    }
 
+    /* ===== MOTION ===== */
     .reveal{
       opacity: 0;
       transform: translateY(10px);
@@ -1415,6 +1437,7 @@
       50%{ transform: translateY(-6px); }
     }
 
+    /* ===== STICKY CTA (фиксированные даты) ===== */
     .sticky-cta{
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -1455,6 +1478,7 @@
       text-overflow: ellipsis;
     }
 
+    /* ===== COOKIE ===== */
     .cookie{
       position: fixed;
       left: 16px; right: 16px;
@@ -1485,29 +1509,25 @@
       line-height: 1.55;
       max-width: 74ch;
     }
+    .cookie a{
+      color: rgba(255,255,255,.90);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 980px){
       .nav{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
-      .grid-4{ grid-template-columns: 1fr 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
-      .grid-2{ grid-template-columns: 1fr; }
-      .skills{ grid-template-columns: 1fr; }
+      .skills-wrap{ grid-template-columns: 1fr; }
       .video{ grid-template-columns: 1fr; }
       .program{ grid-template-columns: 1fr; }
       .transform{ grid-template-columns: 1fr; }
       .form-wrap{ grid-template-columns: 1fr; }
-      .row{ grid-template-columns: 1fr; }
 
-      .author-top{
-        grid-template-columns: 1fr;
-        justify-items: stretch;
-        align-items: start;
-      }
-      .author-photo{
-        width: 100%;
-        max-width: 100%;
-        aspect-ratio: 3 / 4;
+      .expert-photo img{
+        max-height: 360px;
       }
     }
     @media (max-width: 640px){
@@ -1519,7 +1539,6 @@
       .logo{ height: 32px; }
       .btn{ padding: 12px 14px; }
     }
-
     @media (prefers-reduced-motion: reduce){
       .float{ animation: none; }
       .reveal{ transition: none; }
@@ -1541,15 +1560,15 @@
 
         <nav class="nav" aria-label="Навигация">
           <a href="#who">Кому</a>
-          <a href="#skills">Навыки</a>
+          <a href="#skills">Быт vs Профессия</a>
           <a href="#benefits">Профессия</a>
           <a href="#program">Программа</a>
-          <a href="#faq">Этот интенсив</a>
           <a href="#register">Регистрация</a>
         </nav>
 
         <div class="actions">
-          <span class="pill" id="datePill"><b>13-14-15 января</b> • 20:00 по Астане</span>
+          <!-- ФИКСИРОВАНО: даты/время статичны -->
+          <span class="pill"><b>13-14-15 января</b> • 20:00 по Астане</span>
           <a class="btn btn-primary" href="#register">
             <span class="muted-dot" aria-hidden="true"></span>
             ЗАРЕГИСТРИРОВАТЬСЯ
@@ -1577,12 +1596,13 @@
             </h1>
 
             <p class="lead">
-              Выберись из жизни, где деньги заканчиваются быстрее, чем месяц, а работа забирает все силы, время и мечты
+              Выберись из жизни, где деньги заканчиваются быстрее, чем месяц, а работа забирает все силы, время и мечты.
             </p>
 
             <div class="hero-meta">
-              <span class="badge"><i data-lucide="calendar"></i> <span id="heroDates">13-14-15 января</span></span>
-              <span class="badge"><i data-lucide="clock-3"></i> <span id="heroTime">20:00 по Астане</span></span>
+              <!-- ФИКСИРОВАНО: статичные значения -->
+              <span class="badge"><i data-lucide="calendar"></i> 13-14-15 января</span>
+              <span class="badge"><i data-lucide="clock-3"></i> 20:00 по Астане</span>
               <span class="badge"><i data-lucide="sparkles"></i> 3 дня</span>
               <span class="badge"><i data-lucide="award"></i> сертификат после интенсива</span>
               <span class="badge"><i data-lucide="laptop"></i> в онлайне</span>
@@ -1594,191 +1614,247 @@
                 <i data-lucide="arrow-right"></i>
                 ЗАРЕГИСТРИРОВАТЬСЯ
               </a>
+
+              <!-- БОНУС: выравнивание по сетке (без “скачка”) -->
               <div class="sub-cta">
                 <span>и получить БОНУС за регистрацию:</span>
-                <a href="#register">
+                <a href="#register" aria-label="Бонус за регистрацию">
                   <i data-lucide="gift"></i>
-                  <b>Топ-4 навыка в онлайне</b>, за которые платят от 300 000 тенге в месяц
+                  <span>Топ-4 навыка в онлайне, за которые платят от 300 000 тенге в месяц</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <aside class="hero-card reveal float" aria-label="Карточка интенсива">
-            <div class="author">
-              <div>
-                <div class="author-top">
-                  <div class="author-meta">
-                    <div class="name">3 дня • сертификат • без опыта</div>
-                    <div class="role">после интенсива • в онлайне</div>
-                  </div>
-
-                  <div class="author-photo" aria-label="Изображение">
-                    <img src="images/author.jpg" alt="NextGen Academy" />
-                  </div>
-                </div>
-
-                <div class="author-points">
-                  <div class="mini">
-                    <div class="t"><i data-lucide="calendar-days"></i> 13-14-15 января</div>
-                    <div class="d">в 20:00 по Астане</div>
-                  </div>
-                  <div class="mini">
-                    <div class="t"><i data-lucide="gift"></i> БОНУС</div>
-                    <div class="d">за регистрацию</div>
-                  </div>
-                  <div class="mini">
-                    <div class="t"><i data-lucide="briefcase"></i> Профессия</div>
-                    <div class="d">ОНЛАЙН-АССИСТЕНТ</div>
-                  </div>
-                  <div class="mini">
-                    <div class="t"><i data-lucide="coins"></i> Доход</div>
-                    <div class="d">от 300 000 тенге в месяц</div>
-                  </div>
-                </div>
+          <!-- Фото эксперта: интегрировано справа, уменьшено, без обрезки -->
+          <aside class="expert reveal float" aria-label="Блок эксперта">
+            <div class="cap">
+              <div style="min-width:0;">
+                <p class="t">3 дня • сертификат • без опыта</p>
+                <p class="s">13-14-15 января • 20:00 по Астане</p>
               </div>
+            </div>
+
+            <div class="expert-photo" aria-label="Фото эксперта">
+              <img src="images/author.jpg" alt="Эксперт NextGen Academy" loading="eager" />
+            </div>
+
+            <div class="expert-points" aria-label="Ключевые тезисы">
+              <div class="expert-pill"><b>Профессия:</b> онлайн-ассистент</div>
+              <div class="expert-pill"><b>Доход:</b> от 300 000 тенге в месяц</div>
+              <div class="expert-pill"><b>Формат:</b> онлайн • бесплатно</div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <!-- ===== WHO: полностью переработано ===== -->
     <section id="who">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Кому обязательно быть</h2>
-            <p>~Работники в найме ~Студенты/выпускники ~Мамы в декрете</p>
-          </div>
-          <a class="btn btn-ghost" href="#register"><i data-lucide="arrow-right"></i> ПРИСОЕДИНИТЬСЯ</a>
-        </div>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Кому обязательно быть</h2>
+          <p class="section-sub">Выберите себя — и приходите на интенсив с понятной целью.</p>
 
-        <div class="grid-3">
-          <div class="card reveal">
-            <div class="icon"><i data-lucide="building-2"></i></div>
-            <h3>Вы устали от офиса, пробок и графика, где жизнь проходит «между работой и сном».
-Хотите перейти на удалёнку без резких решений и риска: начать с понятных шагов и уже через 2–3 часа в день выйти на первые деньги онлайн.</h3>
-            <p></p>
+          <div class="tags" aria-label="Целевая аудитория (плашки)">
+            <div class="tag"><i data-lucide="building-2"></i> Работники в найме</div>
+            <div class="tag"><i data-lucide="graduation-cap"></i> Студенты/выпускники</div>
+            <div class="tag"><i data-lucide="baby"></i> Мамы в декрете</div>
           </div>
-          <div class="card reveal">
-            <div class="icon"><i data-lucide="graduation-cap"></i></div>
-            <h3>Если нет опыта — это нормально.
-На интенсиве вы поймёте, как устроена профессия онлайн-ассистента, какие задачи реально дают новичкам и где искать первые проекты.
-Без сложных терминов — только практичные действия и понятная дорожная карта.</h3>
-            <p></p>
-          </div>
-          <div class="card reveal">
-            <div class="icon"><i data-lucide="baby"></i></div>
-            <h3>Нужен доход из дома, но нет возможности работать полный день.
-Покажем, как начать мягко: совмещать с ребёнком, выстроить график под себя и зарабатывать, используя навыки, которые вы уже применяете каждый день в быту.</h3>
-            <p></p>
+
+          <div style="margin-top:16px;">
+            <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ПРИСОЕДИНИТЬСЯ</a>
           </div>
         </div>
 
-        <div class="glass reveal" style="margin-top:14px; padding:18px;">
-          <div class="grid-2">
-            <div class="card" style="min-height:auto;">
-              <div class="icon"><i data-lucide="user-check"></i></div>
-              <h3>Онлайн-ассистент — это профессия, которую реально может освоить любая девушка 20-35 лет</h3>
-              <p>
-                Даже если ты никогда не работала в онлайне<br>
-                Даже если ты боишься, что ничего не умеешь
-              </p>
-            </div>
+        <!-- Манифест -->
+        <div class="manifest reveal" aria-label="Блок-манифест">
+          <h3>Онлайн-ассистент — это не просто первая работа</h3>
+          <p>
+            Это роль, где вы учитесь управлять задачами, коммуникацией и порядком — и превращаете привычные навыки в понятную профессию.
+            Без «магии», без сложных терминов и без необходимости иметь опыт в онлайне.
+          </p>
+        </div>
 
-            <div class="card" style="min-height:auto;">
-              <div class="icon"><i data-lucide="alert-triangle"></i></div>
-              <h3>Рекомендую вам все отложить и прийти на мастер-класс, если вы сейчас:</h3>
-              <p style="line-height:1.8;">
-                — Живёте «от зарплаты до зарплаты» и боитесь потерять даже эту работу<br>
-                — Устаете так, что дома нет сил даже просто лечь<br>
-                — Работа — это не про развитие, а про «выжить и дотянуть до выходных»<br>
-                — Ежедневные пробки, будильники и начальство забирают все силы<br>
-                — Деньги уходят быстрее, чем приходят: кредиты, расходы, постоянная тревога<br>
-                — С 2026 года — страх увольнений и непонимание, что будет дальше<br>
-                — Пытаетесь откликаться, но вас не берут: будто вы «неподходящая»<br>
-                — Хочется работать из дома, но кажется, что «в онлайне меня никто не ждёт»<br>
-                — Чувствуете, что застряли: жизнь идёт, а вы топчетесь на месте<br>
-                — Внутри сидит тихая мысль: «я могу больше… но где взять шанс?»
-              </p>
-            </div>
-          </div>
+        <!-- Целевая аудитория: по логике из прежнего блока, без лишнего жирного -->
+        <div class="glass audience reveal" aria-label="Этот интенсив для вас">
+          <h3>Этот интенсив для вас, если вы девушка 20–35 лет</h3>
+          <p>
+            Даже если вы никогда не работали в онлайне, и кажется, что “ничего не умеете”.
+          </p>
+          <ul>
+            <li>Хотите освоить профессию и начать зарабатывать из дома.</li>
+            <li>Нужны понятные шаги и дорожная карта без перегруза.</li>
+            <li>Важно мягко войти в онлайн без риска и резких решений.</li>
+          </ul>
+        </div>
 
-          <div style="margin-top:14px;">
+        <!-- “Рекомендую всё отложить” — отдельным текстом без рамки -->
+        <div class="recommend reveal" aria-label="Рекомендую всё отложить">
+          <h3>Рекомендую вам всё отложить и прийти на мастер-класс, если вы сейчас:</h3>
+          <ul>
+            <li>Живёте «от зарплаты до зарплаты» и боитесь потерять даже эту работу</li>
+            <li>Устаете так, что дома нет сил даже просто лечь</li>
+            <li>Работа — это не про развитие, а про «выжить и дотянуть до выходных»</li>
+            <li>Ежедневные пробки, будильники и начальство забирают все силы</li>
+            <li>Деньги уходят быстрее, чем приходят: кредиты, расходы, постоянная тревога</li>
+            <li>С 2026 года — страх увольнений и непонимание, что будет дальше</li>
+            <li>Пытаетесь откликаться, но вас не берут: будто вы «неподходящая»</li>
+            <li>Хочется работать из дома, но кажется, что «в онлайне меня никто не ждёт»</li>
+            <li>Чувствуете, что застряли: жизнь идёт, а вы топчетесь на месте</li>
+            <li>Внутри сидит тихая мысль: «я могу больше… но где взять шанс?»</li>
+          </ul>
+
+          <div style="margin-top:18px;">
             <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ПРИСОЕДИНИТЬСЯ</a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== SKILLS: переработано в "Быт → Профессия" ===== -->
     <section id="skills">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>А что если я скажу, что вы уже выполняете работу ассистента?</h2>
-            <p>Вы уже каждый день делаете бесплатно то, за что ассистент получает деньги:</p>
-          </div>
-          <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i>ОСВОИТЬ</a>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Быт vs Профессия: вы уже делаете это каждый день</h2>
+          <p class="section-sub">Привычные бытовые задачи легко превращаются в задачи ассистента — и начинают стоить денег.</p>
         </div>
 
-        <div class="skills">
-          <div class="skill-list reveal" aria-label="Список навыков">
+        <div class="skills-wrap">
+          <div class="skill-list reveal" aria-label="Слайды навыков">
             <div class="skill">
-              <div class="k"><i data-lucide="check-square"></i> УМЕНИЕ НАВОДИТЬ ПОРЯДОК В ДЕЛАХ И ЗАДАЧАХ</div>
-              <div class="v">
-                Ведение списка покупок, напоминаний, дел семьи, расписания врачей и секций<br>
-                Ведение списка задач руководителя в Trello / Google Calendar
+              <div class="skill-head">
+                <div class="skill-title"><i data-lucide="check-square"></i> Умение наводить порядок в делах и задачах</div>
               </div>
-              <div class="pay"><span>70.000тг/мес</span></div>
+
+              <div class="skill-pairs" aria-label="Связка Быт → Профессия">
+                <div class="pair">
+                  <div class="lbl">Быт</div>
+                  <p class="txt">Списки покупок, напоминания, дела семьи, расписания врачей и секций.</p>
+                </div>
+
+                <div class="pair-arrow" aria-hidden="true">→</div>
+
+                <div class="pair">
+                  <div class="lbl">Профессия</div>
+                  <p class="txt">Ведение списка задач руководителя в Trello / Google Calendar.</p>
+                </div>
+              </div>
+
+              <div class="skill-foot">
+                <div class="ability">Это умение приносит доход</div>
+                <div class="pay">70.000тг/мес</div>
+              </div>
             </div>
 
             <div class="skill">
-              <div class="k"><i data-lucide="search"></i> УМЕНИЕ ЗАМЕЧАТЬ ДЕТАЛИ</div>
-              <div class="v">
-                Замечать ошибки, недочеты, забытые вещи: «ты забыл ключи», «у тебя опечатка», «дата не та»<br>
-                Проверка текстов, ссылок, документов перед отправкой/публикацией
+              <div class="skill-head">
+                <div class="skill-title"><i data-lucide="search"></i> Умение замечать детали</div>
               </div>
-              <div class="pay"><span>100.000тг/мес</span></div>
+
+              <div class="skill-pairs">
+                <div class="pair">
+                  <div class="lbl">Быт</div>
+                  <p class="txt">Замечать ошибки и недочеты: «опечатка», «дата не та», «что-то забыли».</p>
+                </div>
+
+                <div class="pair-arrow" aria-hidden="true">→</div>
+
+                <div class="pair">
+                  <div class="lbl">Профессия</div>
+                  <p class="txt">Проверка текстов, ссылок и документов перед отправкой/публикацией.</p>
+                </div>
+              </div>
+
+              <div class="skill-foot">
+                <div class="ability">Это умение приносит доход</div>
+                <div class="pay">100.000тг/мес</div>
+              </div>
             </div>
 
             <div class="skill">
-              <div class="k"><i data-lucide="message-circle"></i> УМЕНИЕ ОБЩАТЬСЯ И ДОНОСИТЬ ИНФОРМАЦИЮ</div>
-              <div class="v">
-                Объяснять домашним, что где лежит, что когда делать, кому куда идти / Объяснять курьеру где находится ваш подъезд<br>
-                Ведение клиентского чата: ответы, порядок, передача информации руководителю
+              <div class="skill-head">
+                <div class="skill-title"><i data-lucide="message-circle"></i> Умение общаться и доносить информацию</div>
               </div>
-              <div class="pay"><span>120.000тг/мес</span></div>
+
+              <div class="skill-pairs">
+                <div class="pair">
+                  <div class="lbl">Быт</div>
+                  <p class="txt">Объяснять людям, что и когда делать, и помогать с ориентирами/инструкциями.</p>
+                </div>
+
+                <div class="pair-arrow" aria-hidden="true">→</div>
+
+                <div class="pair">
+                  <div class="lbl">Профессия</div>
+                  <p class="txt">Ведение клиентского чата: ответы, порядок, передача информации руководителю.</p>
+                </div>
+              </div>
+
+              <div class="skill-foot">
+                <div class="ability">Это умение приносит доход</div>
+                <div class="pay">120.000тг/мес</div>
+              </div>
             </div>
 
             <div class="skill">
-              <div class="k"><i data-lucide="rocket"></i> УМЕНИЕ БЫСТРО РАЗБИРАТЬСЯ В НОВОМ</div>
-              <div class="v">
-                Найти, как записаться в поликлинику, оформить доставку, подобрать школу, разобраться с новым приложением<br>
-                Поиск нужного сервиса/решения и объяснение команде, как им пользоваться
+              <div class="skill-head">
+                <div class="skill-title"><i data-lucide="rocket"></i> Умение быстро разбираться в новом</div>
               </div>
-              <div class="pay"><span>150.000тг/мес</span></div>
+
+              <div class="skill-pairs">
+                <div class="pair">
+                  <div class="lbl">Быт</div>
+                  <p class="txt">Разобраться с новым приложением/сервисом и быстро найти решение.</p>
+                </div>
+
+                <div class="pair-arrow" aria-hidden="true">→</div>
+
+                <div class="pair">
+                  <div class="lbl">Профессия</div>
+                  <p class="txt">Поиск инструмента/решения и объяснение команде, как им пользоваться.</p>
+                </div>
+              </div>
+
+              <div class="skill-foot">
+                <div class="ability">Это умение приносит доход</div>
+                <div class="pay">150.000тг/мес</div>
+              </div>
             </div>
 
             <div class="skill">
-              <div class="k"><i data-lucide="table"></i> УМЕНИЕ ПОЛЬЗОВАТЬСЯ БАЗОВЫМИ ПРИЛОЖЕНИЯМИ</div>
-              <div class="v">
-                Создавать заметки, отправлять ссылки в мессенджере, вести списки в телефоне<br>
-                Создание таблиц, документов и рабочих файлов в Google таблицах или др. сервисах
+              <div class="skill-head">
+                <div class="skill-title"><i data-lucide="table"></i> Умение пользоваться базовыми приложениями</div>
               </div>
-              <div class="pay"><span>170.000тг/мес</span></div>
+
+              <div class="skill-pairs">
+                <div class="pair">
+                  <div class="lbl">Быт</div>
+                  <p class="txt">Заметки, списки, ссылки в мессенджере, простая организация информации.</p>
+                </div>
+
+                <div class="pair-arrow" aria-hidden="true">→</div>
+
+                <div class="pair">
+                  <div class="lbl">Профессия</div>
+                  <p class="txt">Создание таблиц, документов и рабочих файлов в Google таблицах и др. сервисах.</p>
+                </div>
+              </div>
+
+              <div class="skill-foot">
+                <div class="ability">Это умение приносит доход</div>
+                <div class="pay">170.000тг/мес</div>
+              </div>
             </div>
           </div>
 
           <aside class="skills-aside reveal">
-            <h3>Вы УЖЕ используете все 5 ключевых навыков онлайн-ассистента ЕЖЕДНЕВНО</h3>
+            <h3>Вы уже используете ключевые навыки онлайн-ассистента ежедневно</h3>
             <p>
-              Просто бесплатно<br>
-              В роли онлайн-ассистента эти же ВАШИ навыки стоят от 150.000₸ до 300.000₸ в месяц
+              В роли онлайн-ассистента эти же навыки стоят от 150.000₸ до 300.000₸ в месяц.
             </p>
-            <div class="big">
-              ОСВОИТЬ ПРОФЕССИЮ БЕСПЛАТНО
-            </div>
-            <div style="margin-top:12px;">
+            <div class="big">ОСВОИТЬ ПРОФЕССИЮ БЕСПЛАТНО</div>
+            <div style="margin-top:14px;">
               <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ОСВОИТЬ ПРОФЕССИЮ БЕСПЛАТНО</a>
             </div>
           </aside>
@@ -1786,13 +1862,12 @@
       </div>
     </section>
 
+    <!-- ===== BENEFITS (оставлено) + внутренний заголовок ===== -->
     <section id="benefits">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>ПРОФЕССИЯ ОНЛАЙН-АССИСТЕНТ ЛУЧШАЯ ТОЧКА ВХОДА В ОНЛАЙН</h2>
-            <p></p>
-          </div>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Профессия онлайн-ассистент — лучшая точка входа в онлайн</h2>
+          <p class="section-sub">Понятная роль, быстрый старт и возможность расти в любую сторону.</p>
         </div>
 
         <div class="grid-3">
@@ -1800,9 +1875,8 @@
             <div class="icon"><i data-lucide="coins"></i></div>
             <h3>Зарабатываешь больше, а работаешь меньше</h3>
             <p>
-              Тебе не нужно сидеть в офисе с 9 до 18, чтобы получать нормальные деньги.
-              Онлайн-ассистент ведет задачи, помогает руководителю освобождать время и может зарабатывать от 150.000₸-300.000₸ в месяц,
-              уделяя 2-3 часа в день на старте
+              Онлайн-ассистент помогает руководителю освобождать время и может зарабатывать от 150.000₸–300.000₸ в месяц,
+              уделяя 2–3 часа в день на старте.
             </p>
           </div>
 
@@ -1810,9 +1884,8 @@
             <div class="icon"><i data-lucide="users"></i></div>
             <h3>Ассистенты нужны всем</h3>
             <p>
-              Каждый руководитель в онлайне тонет в хаосе задач. Им нужна правая рука - человек, который напомнит, организует,
-              возьмет рутину на себя. Онлайн-ассистент закрывает этот вопрос, поэтому спрос растет из года в год
-              и даже ИИ никогда не заменит живого ассистента
+              Руководители в онлайне тонут в хаосе задач. Им нужна “правая рука”: порядок, напоминания и коммуникации.
+              Спрос растёт — и хорошего ассистента ценят.
             </p>
           </div>
 
@@ -1820,8 +1893,7 @@
             <div class="icon"><i data-lucide="trending-up"></i></div>
             <h3>Профессия с быстрым ростом</h3>
             <p>
-              Через 2-3 месяца практики доход увеличивается до 150.000–3000.000₸, а дальше можно расти в менеджера, проджекта, куратора,
-              дизайнера, тех. спеца - куда захочешь
+              Через 2–3 месяца практики можно увеличить доход и расти в менеджера, проджекта, куратора, дизайнера или тех. спеца.
             </p>
           </div>
 
@@ -1829,8 +1901,7 @@
             <div class="icon"><i data-lucide="globe"></i></div>
             <h3>Можно работать из любой точки мира</h3>
             <p>
-              Поехала в другой город? Переехала в другую страну? Работа остается с тобой.
-              Тебе нужен только телефон и ноут - все. Не нужно стоять в пробках по дороге на работу и отчитываться за опоздания
+              Нужны только телефон/ноутбук и интернет. Без пробок и без привязки к офису.
             </p>
           </div>
 
@@ -1838,8 +1909,7 @@
             <div class="icon"><i data-lucide="layers"></i></div>
             <h3>Можно совмещать с основной работой</h3>
             <p>
-              На старте достаточно 2–3 часов в день, чтобы взять первый проект.
-              Ты не увольняешься, не рискуешь, не стрессуешь. Просто добавляешь +1 зарплату сверху к текущей
+              На старте достаточно 2–3 часов в день, чтобы взять первый проект — без резких решений и риска.
             </p>
           </div>
 
@@ -1847,29 +1917,28 @@
             <div class="icon"><i data-lucide="heart-handshake"></i></div>
             <h3>Освоит любая девушка</h3>
             <p>
-              Не нужен диплом, не нужно быть технарем, блогером или айтишником.
-              Мы учим с нуля: как вести задачи, как общаться, как работать в приложениях.
-              Даже если ты думаешь «я ничего не умею» - на деле, все это уже есть у тебя в быту
+              Мы учим с нуля: задачи, коммуникация, сервисы. Без дипломов и “сложных входов”.
             </p>
           </div>
         </div>
 
-        <div style="margin-top:14px;" class="reveal">
+        <div style="margin-top:16px;" class="reveal">
           <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ОСВОИТЬ ПРОФЕССИЮ БЕСПЛАТНО</a>
         </div>
       </div>
     </section>
 
+    <!-- ===== VIDEO: убраны два блока справа, добавлена плашка "в 2026 году" ===== -->
     <section id="video">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Почему онлайн-ассистенты на вес золота?</h2>
-            <p>
-              Смотри это короткое видео, чтобы понять, почему на самом деле руководители ищут онлайн-ассистентов,
-              почему спрос на них растет каждый месяц и как ты можешь начать зарабатывать в онлайне уже в ближайший месяц
-            </p>
-          </div>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">
+            Почему онлайн-ассистенты на вес золота?
+            <span class="year-badge"><i data-lucide="sparkles"></i> в 2026 году</span>
+          </h2>
+          <p class="section-sub">
+            Смотри короткое видео, чтобы понять, почему руководители ищут онлайн-ассистентов и как начать зарабатывать уже в ближайший месяц.
+          </p>
         </div>
 
         <div class="video">
@@ -1885,30 +1954,31 @@
             </div>
           </div>
 
-          <div class="glass reveal" style="padding:18px;">
-            <div class="card" style="min-height:auto; background: rgba(255,255,255,.03);">
-              <div class="icon"><i data-lucide="search"></i></div>
-              <h3>Почему руководители ищут онлайн-ассистентов</h3>
-              <p>Почему спрос на них растет каждый месяц</p>
-            </div>
-            <div class="card" style="min-height:auto; margin-top:14px; background: rgba(255,255,255,.03);">
-              <div class="icon"><i data-lucide="arrow-right"></i></div>
-              <h3>Как начать зарабатывать в онлайне</h3>
-              <p>Уже в ближайший месяц</p>
+          <!-- Вместо двух удалённых блоков — один компактный смысловой -->
+          <div class="glass reveal" style="padding:20px;">
+            <h3 style="margin:0 0 12px; font-family:Unbounded,Manrope,system-ui,sans-serif; font-size: clamp(16px,2vw,22px);">
+              Что вы поймёте после просмотра
+            </h3>
+            <ul style="margin:0; padding-left:18px; color: var(--muted); font-size:14px; line-height:1.9;">
+              <li>Почему спрос на онлайн-ассистентов растёт.</li>
+              <li>Какие задачи дают новичкам и за что платят.</li>
+              <li>Как вам сделать первые шаги без перегруза.</li>
+            </ul>
+
+            <div style="margin-top:16px;">
+              <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ЗАРЕГИСТРИРОВАТЬСЯ</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== PROGRAM: внутренний заголовок ===== -->
     <section id="program">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Программа: что будет на 1-м, 2-м и 3-м дне</h2>
-            <p></p>
-          </div>
-          <a class="btn btn-ghost" href="#register"><i data-lucide="arrow-right"></i> ЗАРЕГИСТРИРОВАТЬСЯ</a>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Программа: что будет на 1-м, 2-м и 3-м дне</h2>
+          <p class="section-sub">Выберите день — и посмотрите, что разберём пошагово.</p>
         </div>
 
         <div class="tabs reveal" role="tablist" aria-label="Программа по дням">
@@ -1935,7 +2005,7 @@
 
             <div class="stat">
               <div class="t">
-                <span><i data-lucide="gift"></i> БОНУС за регистрацию</span>
+                <span><i data-lucide="gift"></i> Бонус за регистрацию</span>
                 <span style="color: var(--orange2); font-weight: 900;">получить</span>
               </div>
               <div class="v">Топ-4 навыка в онлайне, за которые платят от 300 000 тенге в месяц</div>
@@ -1951,29 +2021,32 @@
             </div>
           </aside>
         </div>
+
+        <div style="margin-top:16px;" class="reveal">
+          <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ЗАРЕГИСТРИРОВАТЬСЯ</a>
+        </div>
       </div>
     </section>
 
+    <!-- ===== TRANSFORM: заголовок внутрь рамки ===== -->
     <section id="transform">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Чтобы из жизни, когда — попасть в жизнь, когда</h2>
-            <p></p>
-          </div>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Чтобы из жизни, когда — попасть в жизнь, когда</h2>
+          <p class="section-sub">Сравните состояние “сейчас” и “после”, чтобы чётко увидеть цель.</p>
         </div>
 
         <div class="transform">
           <div class="glass list reveal">
             <h3><i data-lucide="cloud-rain"></i> Чтобы из жизни, когда:</h3>
             <ul>
-              <li>Работа не приносит радости, сидишь там с утра до вечера и возвращаешься домой как выжатая тряпка</li>
-              <li>Нет уверенности за свое будущее;</li>
-              <li>вечно что-то надо успеть, кому-то помочь, о чем-то не забыть;</li>
-              <li>деньги исчезают быстрее, чем появляются - и ты уже не помнишь, когда спокойно вздыхала после зарплаты;</li>
-              <li>ощущение, что все вокруг куда-то двигаются, растут, пробуют новое… а ты как будто стоишь на месте;</li>
-              <li>страшно менять что-то, потому что нет ни времени, ни поддержки, ни понимания «с чего начать»;</li>
-              <li>внутри сидит тихая мысль: «я могу больше… но где взять шанс?»</li>
+              <li>Работа не приносит радости, возвращаешься домой как выжатая тряпка</li>
+              <li>Нет уверенности за свое будущее</li>
+              <li>Вечно что-то надо успеть, кому-то помочь, о чем-то не забыть</li>
+              <li>Деньги исчезают быстрее, чем появляются</li>
+              <li>Ощущение, что все вокруг двигаются и растут, а ты стоишь на месте</li>
+              <li>Страшно менять что-то, потому что нет понимания «с чего начать»</li>
+              <li>Внутри сидит тихая мысль: «я могу больше… но где взять шанс?»</li>
             </ul>
 
             <div class="transform-media" aria-label="Фото в рамке">
@@ -1986,12 +2059,12 @@
           <div class="glass list reveal">
             <h3><i data-lucide="sun"></i> Попасть в жизнь, когда:</h3>
             <ul>
-              <li>Ты работаешь дома или где хочешь — без пробок, без начальника, без нервотрепки. Хоть с кухни, хоть из другого города или страны;</li>
-              <li>у тебя есть стабильный онлайн-доход, а не вечная тревожность из-за постоянно растущих расходов;</li>
-              <li>время наконец-то твое: ты сама выбираешь график и нагрузку;</li>
-              <li>ты спокойна, потому что знаешь: твои навыки ценят, тебя выбирают, ты можешь найти проект в любой момент;</li>
-              <li>появляется чувство полезности, нужности, а не выжатости;</li>
-              <li>жизнь становится легче, свободнее и… наконец-то про твое будущее, а не про выживание</li>
+              <li>Ты работаешь дома или где хочешь — без пробок, без начальника, без нервотрепки</li>
+              <li>У тебя есть стабильный онлайн-доход</li>
+              <li>Время наконец-то твоё: ты сама выбираешь график и нагрузку</li>
+              <li>Ты спокойна: навыки ценят, тебя выбирают, ты можешь найти проект в любой момент</li>
+              <li>Появляется чувство полезности и лёгкости</li>
+              <li>Жизнь становится свободнее и про твоё будущее</li>
             </ul>
 
             <div class="transform-media" aria-label="Галерея в рамке">
@@ -2027,70 +2100,20 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="faq">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Частые вопросы</h2>
-            <p>Если остались сомнения — посмотри ответы ниже.</p>
-          </div>
-          <a class="btn btn-ghost" href="#register"><i data-lucide="arrow-right"></i> ЗАРЕГИСТРИРОВАТЬСЯ</a>
-        </div>
-
-        <div class="faq reveal" aria-label="FAQ">
-          <details class="faq-item">
-            <summary>
-              Это правда бесплатно?
-              <span class="chev"><i data-lucide="chevron-down"></i></span>
-            </summary>
-            <div class="ans">
-              Да, участие в 3-дневном интенсиве бесплатное. После регистрации вы получите инструкции и ссылку на подключение.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              Я без опыта — мне подойдет?
-              <span class="chev"><i data-lucide="chevron-down"></i></span>
-            </summary>
-            <div class="ans">
-              Да. На интенсиве разберем профессию онлайн-ассистента с нуля и дадим понятные шаги, как начать.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              Будет запись?
-              <span class="chev"><i data-lucide="chevron-down"></i></span>
-            </summary>
-            <div class="ans">
-              Информацию по доступу и формату участия вы получите после регистрации.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              Что нужно для участия?
-              <span class="chev"><i data-lucide="chevron-down"></i></span>
-            </summary>
-            <div class="ans">
-              Телефон/ноутбук и доступ в интернет. Ссылку на подключение отправим после регистрации.
-            </div>
-          </details>
+        <div style="margin-top:16px;" class="reveal">
+          <a class="btn btn-primary" href="#register"><i data-lucide="arrow-right"></i> ЗАРЕГИСТРИРОВАТЬСЯ</a>
         </div>
       </div>
     </section>
+
+    <!-- FAQ секция удалена по ТЗ -->
 
     <section id="register">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Регистрация</h2>
-            <p>Заполни данные — получишь инструкции и ссылку на подключение. Бонус отправим вместе с подтверждением.</p>
-          </div>
+        <div class="glass section-card reveal">
+          <h2 class="section-title">Регистрация</h2>
+          <p class="section-sub">Заполни данные — получишь инструкции и ссылку на подключение. Бонус отправим вместе с подтверждением.</p>
         </div>
 
         <div class="form-wrap">
@@ -2111,7 +2134,6 @@
 
               <div class="field">
                 <label for="phone">Телефон</label>
-
                 <div class="phone-single">
                   <span class="phone-prefix">🇰🇿 +7</span>
                   <input id="phone" name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" required />
@@ -2119,18 +2141,19 @@
               </div>
 
               <div class="consents">
+                <!-- СТРОГО по ТЗ: тексты без изменений -->
                 <label class="consent">
                   <input type="checkbox" name="c1" checked required />
-                  <span>Я даю согласие на обработку персональных данных согласно <a href="pd-consent.html" target="_blank" rel="noopener">политике</a></span>
+                  <span>Даю своё согласие на обработку персональных данных</span>
                 </label>
 
                 <label class="consent">
                   <input type="checkbox" name="c2" checked required />
-                  <span>Я принимаю условия <a href="offer.html" target="_blank" rel="noopener"><b>публичной оферты</b></a></span>
+                  <span>С текстом Договора-Оферты и Политики конфиденциальности ознакомлен(-а)</span>
                 </label>
               </div>
 
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-primary" type="submit" style="width:100%; padding:16px 18px; border-radius:16px; font-size:13px; letter-spacing:.10em; text-transform:uppercase;">
                 ЗАРЕГИСТРИРОВАТЬСЯ
               </button>
 
@@ -2147,7 +2170,8 @@
           <aside class="glass side-info reveal">
             <div class="block">
               <h4><i data-lucide="calendar-clock"></i> Даты и время</h4>
-              <p><b>13–14–15 января</b> • 20:00 по Астане</p>
+              <!-- ФИКСИРОВАНО -->
+              <p><b>13-14-15 января</b> • 20:00 по Астане</p>
             </div>
 
             <div class="block">
@@ -2175,7 +2199,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="copy">
-          © <span id="year"></span> NextGen Academy. Все права защищены.
+          © 2026 NextGen Academy. Все права защищены.
           <div class="devline">Разработка: <a href="https://anukenn.vercel.app" target="_blank" rel="noopener">Anuken</a></div>
         </div>
 
@@ -2192,6 +2216,7 @@
     <div class="inner">
       <div class="txt">
         <b>Бесплатный интенсив • 3 дня</b>
+        <!-- ФИКСИРОВАНО -->
         <span>13–14–15 января • 20:00 по Астане</span>
       </div>
       <a class="btn btn-primary" href="#register">
@@ -2217,9 +2242,6 @@
   <script>
     // Icons
     try { lucide.createIcons(); } catch(e){}
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
 
     // Reveal on scroll
     (function(){
@@ -2307,7 +2329,6 @@
         if(url.trim()){
           window.open(url, '_blank', 'noopener');
         }else{
-          // Если ссылка не задана — просто скроллим к регистрации
           const reg = document.getElementById('register');
           if(reg) reg.scrollIntoView({behavior:'smooth', block:'start'});
         }
@@ -2398,13 +2419,12 @@
       const success = document.getElementById('successBox');
       if(!form || !success) return;
 
-      // Автовключение галочек при загрузке (на случай, если браузер сбросил состояние)
+      // Автовключение галочек при загрузке
       const checks = form.querySelectorAll('input[type="checkbox"]');
       checks.forEach(ch => { if(!ch.checked) ch.checked = true; });
 
       form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        // Валидация браузером
         if(!form.checkValidity()){
           form.reportValidity();
           return;
